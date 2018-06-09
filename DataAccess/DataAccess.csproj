@@ -8,8 +8,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Concrete\Mappers" />
-    <Folder Include="Interfaces\Mappers" />
-    <Folder Include="Interfaces\Repositories" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.6.1" />
   </ItemGroup>
 </Project>
