@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TinyTimeline.Controllers
 {
-    public class HomeController : Controller
+    public class MainController : Controller
     {
         private readonly ITimelineEventsRepository timelineEventsRepository;
 
-        public HomeController(ITimelineEventsRepository timelineEventsRepository)
+        public MainController(ITimelineEventsRepository timelineEventsRepository)
         {
             this.timelineEventsRepository = timelineEventsRepository;
         }
