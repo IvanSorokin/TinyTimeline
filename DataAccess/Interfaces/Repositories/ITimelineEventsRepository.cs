@@ -1,7 +1,7 @@
 ﻿using System;
 using Domain.Objects;
 
-namespace DataAccess.Interface.Repositories
+namespace DataAccess.Interfaces.Repositories
 {
     public interface ITimelineEventsRepository
     {

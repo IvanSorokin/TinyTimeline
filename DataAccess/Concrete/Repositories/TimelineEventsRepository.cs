@@ -1,7 +1,7 @@
 ﻿using System;
 using DataAccess.Documents;
-using DataAccess.Interface.Mappers;
-using DataAccess.Interface.Repositories;
+using DataAccess.Interfaces.Mappers;
+using DataAccess.Interfaces.Repositories;
 using Domain.Objects;
 using MongoDB.Driver;
 
@@ -12,7 +12,7 @@ namespace DataAccess.Concrete.Repositories
         private readonly IMongoCollection<TimelineEventDocument> collection;
         private readonly ITwoWayMapper<TimelineEventDocument, TimelineEvent> eventsMapper;
 
-        public TimelineEventsRepository(IMongoCollection<TimelineEventDocument> collection, 
+        public TimelineEventsRepository(IMongoCollection<TimelineEventDocument> collection,
                                         ITwoWayMapper<TimelineEventDocument, TimelineEvent> eventsMapper)
         {
             this.collection = collection;
@@ -28,8 +28,8 @@ namespace DataAccess.Concrete.Repositories
 
         public void Save(TimelineEvent timelineEvent)
         {
-            collection.ReplaceOne(x => x.Id == timelineEvent.Id, 
-                                  eventsMapper.Map(timelineEvent), 
+            collection.ReplaceOne(x => x.Id == timelineEvent.Id,
+                                  eventsMapper.Map(timelineEvent),
                                   new UpdateOptions {IsUpsert = true});
         }
     }

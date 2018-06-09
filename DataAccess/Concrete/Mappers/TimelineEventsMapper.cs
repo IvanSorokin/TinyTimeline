@@ -1,10 +1,10 @@
 ﻿using DataAccess.Documents;
-using DataAccess.Interface.Mappers;
+using DataAccess.Interfaces.Mappers;
 using Domain.Objects;
 
 namespace DataAccess.Concrete.Mappers
 {
-    public class TimelineEventsMapper : ITwoWayMapper<TimelineEventDocument,TimelineEvent>
+    public class TimelineEventsMapper : ITwoWayMapper<TimelineEventDocument, TimelineEvent>
     {
         public TimelineEventDocument Map(TimelineEvent obj)
         {
@@ -12,7 +12,7 @@ namespace DataAccess.Concrete.Mappers
                    {
                        Id = obj.Id,
                        Text = obj.Text,
-                       Time = obj.Time
+                       DateTime = obj.DateTime
                    };
         }
 
@@ -22,7 +22,7 @@ namespace DataAccess.Concrete.Mappers
                    {
                        Id = obj.Id,
                        Text = obj.Text,
-                       Time = obj.Time
+                       DateTime = obj.DateTime
                    };
         }
     }

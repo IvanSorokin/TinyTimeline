@@ -1,4 +1,5 @@
 ﻿using System;
+using DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -16,37 +17,35 @@ namespace TinyTimeline
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
             services.AddMvc()
                     .AddControllersAsServices();
 
             return ConfigureIoC(services);
         }
-        
+
         public IServiceProvider ConfigureIoC(IServiceCollection services)
         {
-            var container = new Container();
+            var registry = new Registry();
+            registry.IncludeRegistry<DataAccessRegistry>();
+
+            var container = new Container(registry);
 
             container.Configure(config =>
                                 {
-                                    // Register stuff in container, using the StructureMap APIs...
                                     config.Scan(_ =>
                                                 {
                                                     _.AssemblyContainingType(typeof(Startup));
+                                                    _.AssemblyContainingType(typeof(DataAccessRegistry));
                                                     _.WithDefaultConventions();
                                                 });
-                                    //Populate the container using the service collection
                                     config.Populate(services);
                                 });
 
             return container.GetInstance<IServiceProvider>();
-
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseStaticFiles();
