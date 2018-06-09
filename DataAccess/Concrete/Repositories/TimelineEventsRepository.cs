@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using DataAccess.Documents;
 using DataAccess.Interfaces.Mappers;
 using DataAccess.Interfaces.Repositories;
@@ -25,6 +27,8 @@ namespace DataAccess.Concrete.Repositories
 
             return result != null ? eventsMapper.Map(result) : null;
         }
+
+        public IEnumerable<TimelineEvent> GetAll() => collection.Find(_ => true).ToEnumerable().Select(eventsMapper.Map);
 
         public void Save(TimelineEvent timelineEvent)
         {

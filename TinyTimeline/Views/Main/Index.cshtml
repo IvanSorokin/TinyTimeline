@@ -1,1 +1,9 @@
-﻿hello
+﻿@model TinyTimeline.Models.MainModel
+
+@foreach (var e in Model.Events)
+{
+    <div>
+        @e.DateTime
+        @e.Text
+    </div>
+}
