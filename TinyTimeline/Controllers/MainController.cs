@@ -19,17 +19,28 @@ namespace TinyTimeline.Controllers
         public IActionResult Index()
         {
             var events = timelineEventsRepository.GetAll().Select(x => new TimelineEventModel
-                                                                       {
-                                                                           Text = x.Text, 
-                                                                           DateTime = x.DateTime
-                                                                       });
-            return View(new MainModel{Events = events});
+            {
+                Text = x.Text,
+                Date = x.Date
+            });
+            return View(new MainModel { Events = events });
         }
-        
+
         public IActionResult AddEvent()
         {
-            timelineEventsRepository.Save(new TimelineEvent {Id = Guid.NewGuid(), DateTime = DateTimeOffset.Now, Text = "test"});
-            return Json("");
+            return View(new TimelineEventModel { Date = DateTime.Today });
+        }
+
+        [HttpPost]
+        public IActionResult SaveEvent(TimelineEventModel model)
+        {
+            timelineEventsRepository.Save(new TimelineEvent
+            {
+                Id = Guid.NewGuid(),
+                Date = model.Date.Date,
+                Text = model.Text
+            });
+            return RedirectToAction("AddEvent");
         }
     }
 }

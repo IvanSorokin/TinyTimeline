@@ -1,9 +1,8 @@
 ﻿@model TinyTimeline.Models.MainModel
-
 @foreach (var e in Model.Events)
 {
     <div>
-        @e.DateTime
+        @Html.DisplayFor(m => e.Date):
         @e.Text
     </div>
 }

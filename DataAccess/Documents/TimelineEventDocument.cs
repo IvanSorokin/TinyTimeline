@@ -9,9 +9,10 @@ namespace DataAccess.Documents
         [BsonId]
         [BsonRepresentation(BsonType.String)]
         public Guid Id { get; set; }
-        
+
         [BsonRepresentation(BsonType.String)]
-        public DateTimeOffset DateTime { get; set; }
+        public DateTime Date { get; set; }
+
         public string Text { get; set; }
     }
 }

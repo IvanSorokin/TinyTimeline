@@ -1,10 +1,15 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace TinyTimeline.Models
 {
     public class TimelineEventModel
     {
-        public DateTimeOffset DateTime { get; set; }
+        [DataType(DataType.Date)]
+        [Required]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime Date { get; set; }
+
         public string Text { get; set; }
     }
 }

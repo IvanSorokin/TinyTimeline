@@ -12,7 +12,7 @@ namespace DataAccess.Concrete.Mappers
                    {
                        Id = obj.Id,
                        Text = obj.Text,
-                       DateTime = obj.DateTime
+                       Date = obj.Date
                    };
         }
 
@@ -22,7 +22,7 @@ namespace DataAccess.Concrete.Mappers
                    {
                        Id = obj.Id,
                        Text = obj.Text,
-                       DateTime = obj.DateTime
+                       Date = obj.Date
                    };
         }
     }
