@@ -14,5 +14,7 @@ namespace DataAccess.Documents
         public DateTime Date { get; set; }
 
         public string Text { get; set; }
+        public int Positive { get; set; }
+        public int Negative { get; set; }
     }
 }

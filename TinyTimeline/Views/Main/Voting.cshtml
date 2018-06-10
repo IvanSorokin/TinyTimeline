@@ -1,0 +1,16 @@
+﻿@model TinyTimeline.Models.MainModel
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+
+@foreach (var e in Model.Events)
+{
+    <div class="vote_item" id="@e.Id">
+        @Html.DisplayFor(m => e.Date):
+        @Html.DisplayFor(m => e.Text)
+
+        <button onclick="sendVote('@e.Id', true)">Like it!</button>
+        <button onclick="sendVote('@e.Id', false)">Dislike it!</button>
+        <button onclick="loadNext()">Skip it!</button>
+        <br />
+    </div>
+}

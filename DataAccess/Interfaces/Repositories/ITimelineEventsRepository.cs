@@ -9,5 +9,6 @@ namespace DataAccess.Interfaces.Repositories
         TimelineEvent Get(Guid id);
         IEnumerable<TimelineEvent> GetAll();
         void Save(TimelineEvent timelineEvent);
+        void Vote(Guid eventId, bool isPositive);
     }
 }

@@ -32,4 +32,7 @@
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Views\Main\Voting.cs" />
+  </ItemGroup>
 </Project>
