@@ -8,8 +8,13 @@
     var nextId = i == Model.Events.Count - 1 ? (Guid?)null : Model.Events.ElementAt(i + 1).Id;
 
     <div @(i == 0 ? "" : "hidden") class="vote_item" id="@e.Id">
+        <label>Date: </label>
         @Html.DisplayFor(m => e.Date)
+        <br />
+
+        <label>Content: </label>
         @Html.DisplayFor(m => e.Text)
+        <br />
 
         <button onclick="sendVote('@e.Id', true, '@nextId')">Like it!</button>
         <button onclick="sendVote('@e.Id', false, '@nextId')">Dislike it!</button>

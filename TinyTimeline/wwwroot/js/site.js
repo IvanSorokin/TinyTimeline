@@ -1,5 +1,5 @@
 ﻿function sendVote(id, positive, nextId) {
-        $.ajax({
+    $.ajax({
             type: "POST",
             url: "/Main/Vote",
             data: {
