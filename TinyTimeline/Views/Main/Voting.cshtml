@@ -18,11 +18,11 @@
 
         <button onclick="sendVote('@e.Id', true, '@nextId')">Like it!</button>
         <button onclick="sendVote('@e.Id', false, '@nextId')">Dislike it!</button>
-        <button onclick="loadNext('@nextId')">Skip it!</button>
+        <button onclick="skip('@e.Id', '@nextId')">Skip it!</button>
         <br />
     </div>
 }
 
 <div hidden id="voteEnd">
-    Done!
+    Done!  @Html.ActionLink("Watch timeline!", "Index", "Main")
 </div>

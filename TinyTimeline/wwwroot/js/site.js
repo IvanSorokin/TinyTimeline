@@ -11,9 +11,15 @@
     loadNext(nextId);
 }
 
+function skip(currentId, nextId) {
+    $("#" + currentId).hide();
+    loadNext(nextId);
+}
+
 function loadNext(nextId) {
     if (nextId == '')
         $("#voteEnd").show();
     else
         $("#" + nextId).show();
+
 }
