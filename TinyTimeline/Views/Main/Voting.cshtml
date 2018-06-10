@@ -2,15 +2,22 @@
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
 
-@foreach (var e in Model.Events)
+@for (var i = 0; i < Model.Events.Count; i++)
 {
-    <div class="vote_item" id="@e.Id">
-        @Html.DisplayFor(m => e.Date):
+    var e = Model.Events.ElementAt(i);
+    var nextId = i == Model.Events.Count - 1 ? (Guid?)null : Model.Events.ElementAt(i + 1).Id;
+
+    <div @(i == 0 ? "" : "hidden") class="vote_item" id="@e.Id">
+        @Html.DisplayFor(m => e.Date)
         @Html.DisplayFor(m => e.Text)
 
-        <button onclick="sendVote('@e.Id', true)">Like it!</button>
-        <button onclick="sendVote('@e.Id', false)">Dislike it!</button>
-        <button onclick="loadNext()">Skip it!</button>
+        <button onclick="sendVote('@e.Id', true, '@nextId')">Like it!</button>
+        <button onclick="sendVote('@e.Id', false, '@nextId')">Dislike it!</button>
+        <button onclick="loadNext('@nextId')">Skip it!</button>
         <br />
     </div>
 }
+
+<div hidden id="voteEnd">
+    Done!
+</div>

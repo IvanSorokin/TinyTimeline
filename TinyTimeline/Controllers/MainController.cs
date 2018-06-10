@@ -20,7 +20,7 @@ namespace TinyTimeline.Controllers
         public IActionResult Index()
         {
             var events = GetAllEvents();
-            return View(new MainModel { Events = events });
+            return View(new MainModel { Events = events.ToList() });
         }
 
         private IEnumerable<TimelineEventModel> GetAllEvents()
@@ -43,7 +43,7 @@ namespace TinyTimeline.Controllers
         public IActionResult Voting()
         {
             var events = GetAllEvents();
-            return View(new MainModel { Events = events });
+            return View(new MainModel { Events = events.ToList() });
         }
 
         [HttpPost]

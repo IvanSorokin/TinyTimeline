@@ -1,4 +1,4 @@
-﻿function sendVote(id, positive) {
+﻿function sendVote(id, positive, nextId) {
         $.ajax({
             type: "POST",
             url: "/Main/Vote",
@@ -7,8 +7,13 @@
                 eventId: id
             }
         });
+    $("#" + id).hide();
+    loadNext(nextId);
 }
 
-function loadNext() {
-
+function loadNext(nextId) {
+    if (nextId == '')
+        $("#voteEnd").show();
+    else
+        $("#" + nextId).show();
 }

@@ -4,6 +4,6 @@ namespace TinyTimeline.Models
 {
     public class MainModel
     {
-        public IEnumerable<TimelineEventModel> Events { get; set; }
+        public ICollection<TimelineEventModel> Events { get; set; }
     }
 }
