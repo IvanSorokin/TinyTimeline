@@ -7,7 +7,7 @@ foreach (var e in Model.Events)
  {
      <div>
          @Html.DisplayFor(m => e.Date):
-         @e.Text;
+         @e.Text
          +(@e.Positive) /
          -(@e.Negative)
      </div>
@@ -23,6 +23,6 @@ foreach (var e in Model.Events)
 else
 {
     <div>
-        <label>@Html.ActionLink("Add some events", "AddEvent", "Interaction") to see the magic.</label>
+        <label>@Html.ActionLink("Add some events", "AddEvent", "Interaction", new {}, new { target = "_blank" }) to see the magic.</label>
     </div>
 }
