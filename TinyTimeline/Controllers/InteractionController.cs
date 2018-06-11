@@ -20,7 +20,7 @@ namespace TinyTimeline.Controllers
             this.eventModelBuilder = eventModelBuilder;
         }
 
-        public IActionResult AddEvent() => View(new TimelineEventModel {Date = DateTime.Today});
+        public IActionResult AddEvent() => View(new TimelineEventModel {Date = DateTime.Today.AddDays(-30)});
 
         public IActionResult Voting()
         {
