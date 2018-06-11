@@ -22,9 +22,7 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="wwwroot\images" />
+    <Content Remove="wwwroot\images\**" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
@@ -34,5 +32,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Views\Main\Voting.cs" />
+    <Compile Remove="wwwroot\images\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="wwwroot\images\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="wwwroot\images\**" />
   </ItemGroup>
 </Project>

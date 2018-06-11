@@ -22,7 +22,7 @@ namespace TinyTimeline
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc()
-                    .AddControllersAsServices();
+                .AddControllersAsServices();
 
             return ConfigureIoC(services);
         }
@@ -50,20 +50,20 @@ namespace TinyTimeline
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            var supportedCultures = new[] { new CultureInfo("en-GB") };
+            var supportedCultures = new[] {new CultureInfo("en-GB")};
             app.UseRequestLocalization(new RequestLocalizationOptions
-            {
-                DefaultRequestCulture = new RequestCulture("en-GB"),
-                SupportedCultures = supportedCultures,
-                SupportedUICultures = supportedCultures
-            });
+                                       {
+                                           DefaultRequestCulture = new RequestCulture("en-GB"),
+                                           SupportedCultures = supportedCultures,
+                                           SupportedUICultures = supportedCultures
+                                       });
             app.UseStaticFiles();
             app.UseDeveloperExceptionPage();
             app.UseMvc(routes =>
                        {
                            routes.MapRoute(
-                                           name: "default",
-                                           template: "{controller=Home}/{action=Index}/{id?}");
+                               "default",
+                               "{controller=Home}/{action=Index}/{id?}");
                        });
         }
     }

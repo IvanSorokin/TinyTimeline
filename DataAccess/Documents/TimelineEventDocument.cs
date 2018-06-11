@@ -10,8 +10,7 @@ namespace DataAccess.Documents
         [BsonRepresentation(BsonType.String)]
         public Guid Id { get; set; }
 
-        [BsonDateTimeOptions(DateOnly = true)]
-        public DateTime Date { get; set; }
+        [BsonDateTimeOptions(DateOnly = true)] public DateTime Date { get; set; }
 
         public string Text { get; set; }
         public int Positive { get; set; }

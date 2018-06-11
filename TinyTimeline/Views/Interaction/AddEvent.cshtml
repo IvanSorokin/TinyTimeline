@@ -1,0 +1,14 @@
+﻿@model TinyTimeline.Models.TimelineEventModel
+
+@using (Html.BeginForm("SaveEvent", "Interaction", FormMethod.Post))
+{
+    <label>Date</label>
+    @Html.EditorFor(m => m.Date)
+
+    <br/>
+    <label>Event description</label>
+    @Html.EditorFor(m => m.Text)
+
+    <br/>
+    <input type="submit" value="Save event"/>
+}

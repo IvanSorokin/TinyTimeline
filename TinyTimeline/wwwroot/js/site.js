@@ -1,7 +1,7 @@
 ﻿function sendVote(id, positive, nextId) {
     $.ajax({
             type: "POST",
-            url: "/Main/Vote",
+            url: "/Interaction/Vote",
             data: {
                 isPositive: positive,
                 eventId: id
@@ -17,9 +17,8 @@ function skip(currentId, nextId) {
 }
 
 function loadNext(nextId) {
-    if (nextId == '')
+    if (!nextId)
         $("#voteEnd").show();
     else
         $("#" + nextId).show();
-
 }

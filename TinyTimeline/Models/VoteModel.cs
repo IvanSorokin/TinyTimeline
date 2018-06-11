@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace TinyTimeline.Models
 {
     public class VoteModel

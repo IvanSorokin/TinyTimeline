@@ -10,10 +10,11 @@ namespace DataAccess
 {
     public class DataAccessRegistry : Registry
     {
-        private readonly IConfigurationRoot appSettings = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+        private readonly IConfigurationRoot appSettings =
+            new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
         public DataAccessRegistry()
-        {           
+        {
             RegisterCollection<TimelineEventDocument>("timelineEvents");
             For(typeof(ITwoWayMapper<TimelineEventDocument, TimelineEvent>)).Use(typeof(TimelineEventsMapper));
         }

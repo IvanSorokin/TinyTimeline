@@ -9,25 +9,25 @@ namespace DataAccess.Concrete.Mappers
         public TimelineEventDocument Map(TimelineEvent obj)
         {
             return new TimelineEventDocument
-            {
-                Id = obj.Id,
-                Text = obj.Text,
-                Date = obj.Date,
-                Positive = obj.Positive,
-                Negative = obj.Negative
-            };
+                   {
+                       Id = obj.Id,
+                       Text = obj.Text,
+                       Date = obj.Date,
+                       Positive = obj.Positive,
+                       Negative = obj.Negative
+                   };
         }
 
         public TimelineEvent Map(TimelineEventDocument obj)
         {
             return new TimelineEvent
-            {
-                Id = obj.Id,
-                Text = obj.Text,
-                Date = obj.Date,
-                Positive = obj.Positive,
-                Negative = obj.Negative
-            };
+                   {
+                       Id = obj.Id,
+                       Text = obj.Text,
+                       Date = obj.Date,
+                       Positive = obj.Positive,
+                       Negative = obj.Negative
+                   };
         }
     }
 }
