@@ -1,0 +1,19 @@
+﻿@model TinyTimeline.Models.PresentationModel
+
+@if (Model.Events.Any())
+{
+    foreach (var e in Model.Events)
+    {
+        <div>
+            @Html.DisplayFor(m => e.Date):
+            @e.Text;
+            +(@e.Positive)
+        </div>
+    }
+}
+else
+{
+    <div>
+        <label>Oh, no positive events! But you can change it, so @Html.ActionLink("vote for events!", "Voting", "Interaction")</label>
+    </div>
+}

@@ -2,7 +2,7 @@
 
 namespace TinyTimeline.Models
 {
-    public class MainModel
+    public class PresentationModel
     {
         public ICollection<TimelineEventModel> Events { get; set; }
     }

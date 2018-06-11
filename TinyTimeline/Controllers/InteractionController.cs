@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Interfaces.Repositories;
 using Domain.Objects;
@@ -11,22 +10,26 @@ namespace TinyTimeline.Controllers
 {
     public class InteractionController : Controller
     {
-        private readonly ITimelineEventModelBuilder timelineEventModelBuilder;
+        private readonly ITimelineEventModelBuilder eventModelBuilder;
         private readonly ITimelineEventsRepository timelineEventsRepository;
 
         public InteractionController(ITimelineEventsRepository timelineEventsRepository,
-                                     ITimelineEventModelBuilder timelineEventModelBuilder)
+                                     ITimelineEventModelBuilder eventModelBuilder)
         {
             this.timelineEventsRepository = timelineEventsRepository;
-            this.timelineEventModelBuilder = timelineEventModelBuilder;
+            this.eventModelBuilder = eventModelBuilder;
         }
-
-        private IEnumerable<TimelineEventModel> GetAllEvents()
-            => timelineEventModelBuilder.DateSortedBuild(timelineEventsRepository.GetAll());
 
         public IActionResult AddEvent() => View(new TimelineEventModel {Date = DateTime.Today});
 
-        public IActionResult Voting() => View(new MainModel {Events = GetAllEvents().ToList()});
+        public IActionResult Voting()
+        {
+            var events = eventModelBuilder.DateSortedBuild(timelineEventsRepository.GetAll()).ToList();
+            return View(new PresentationModel
+                        {
+                            Events = events
+                        });
+        }
 
         [HttpPost]
         public IActionResult Vote(VoteModel vote)

@@ -8,5 +8,8 @@ namespace TinyTimeline.ModelBuilding
     {
         TimelineEventModel Build(TimelineEvent timelineEvent);
         IEnumerable<TimelineEventModel> DateSortedBuild(IEnumerable<TimelineEvent> events);
+        IEnumerable<TimelineEventModel> DateSortedPositiveBuild(IEnumerable<TimelineEvent> events);
+        IEnumerable<TimelineEventModel> DateSortedNegativeBuild(IEnumerable<TimelineEvent> events);
+        IEnumerable<TimelineEventModel> DateSortedDebatableBuild(IEnumerable<TimelineEvent> events);
     }
 }

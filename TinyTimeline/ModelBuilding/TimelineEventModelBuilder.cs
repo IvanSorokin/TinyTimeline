@@ -21,5 +21,20 @@ namespace TinyTimeline.ModelBuilding
             return events.OrderBy(x => x.Date)
                          .Select(Build);
         }
+        
+        public IEnumerable<TimelineEventModel> DateSortedPositiveBuild(IEnumerable<TimelineEvent> events)
+        {
+            return DateSortedBuild(events).Where(x => x.Positive > 0 && x.Negative == 0);
+        }
+        
+        public IEnumerable<TimelineEventModel> DateSortedNegativeBuild(IEnumerable<TimelineEvent> events)
+        {
+            return DateSortedBuild(events).Where(x => x.Positive == 0 && x.Negative > 0);
+        }
+        
+        public IEnumerable<TimelineEventModel> DateSortedDebatableBuild(IEnumerable<TimelineEvent> events)
+        {
+            return DateSortedBuild(events).Where(x => x.Positive > 0 && x.Negative > 0);
+        }
     }
 }

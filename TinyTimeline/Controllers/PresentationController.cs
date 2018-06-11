@@ -9,23 +9,41 @@ namespace TinyTimeline.Controllers
 {
     public class PresentationController : Controller
     {
-        private readonly ITimelineEventModelBuilder timelineEventModelBuilder;
-        private readonly ITimelineEventsRepository timelineEventsRepository;
+        private readonly ITimelineEventModelBuilder eventModelBuilder;
+        private readonly ITimelineEventsRepository eventsRepository;
 
-        public PresentationController(ITimelineEventsRepository timelineEventsRepository,
-                                      ITimelineEventModelBuilder timelineEventModelBuilder)
+        public PresentationController(ITimelineEventsRepository eventsRepository,
+                                      ITimelineEventModelBuilder eventModelBuilder)
         {
-            this.timelineEventsRepository = timelineEventsRepository;
-            this.timelineEventModelBuilder = timelineEventModelBuilder;
+            this.eventsRepository = eventsRepository;
+            this.eventModelBuilder = eventModelBuilder;
         }
 
         public IActionResult Index()
         {
-            var events = GetAllEvents();
-            return View(new MainModel {Events = events.ToList()});
+            var events = eventModelBuilder.DateSortedBuild(eventsRepository.GetAll()).ToList();
+            return View(new PresentationModel{ Events = events });
+        }
+
+        public IActionResult PositiveEvents()
+        {
+            var events = eventModelBuilder.DateSortedPositiveBuild(eventsRepository.GetAll()).ToList();
+            return View(new PresentationModel {Events = events});
+        }
+        
+        public IActionResult NegativeEvents()
+        {
+            var events = eventModelBuilder.DateSortedNegativeBuild(eventsRepository.GetAll()).ToList();
+            return View(new PresentationModel {Events = events});
+        }
+        
+        public IActionResult DebatableEvents()
+        {
+            var events = eventModelBuilder.DateSortedDebatableBuild(eventsRepository.GetAll()).ToList();
+            return View(new PresentationModel {Events = events});
         }
 
         private IEnumerable<TimelineEventModel> GetAllEvents()
-            => timelineEventModelBuilder.DateSortedBuild(timelineEventsRepository.GetAll());
+            => eventModelBuilder.DateSortedBuild(eventsRepository.GetAll());
     }
 }
