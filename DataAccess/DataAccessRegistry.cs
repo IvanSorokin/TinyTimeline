@@ -17,6 +17,7 @@ namespace DataAccess
         {
             RegisterCollection<TimelineEventDocument>("timelineEvents");
             For(typeof(ITwoWayMapper<TimelineEventDocument, TimelineEvent>)).Use(typeof(TimelineEventsMapper));
+            For(typeof(ITwoWayMapper<SessionDocument, Session>)).Use(typeof(SessionMapper));
         }
 
         private void RegisterCollection<T>(string collectionName)
@@ -24,7 +25,7 @@ namespace DataAccess
             var connectionString = appSettings["MongoConnection:ConnectionString"];
             var dbString = appSettings["MongoConnection:Database"];
             var collection = new MongoClient(connectionString).GetDatabase(dbString).GetCollection<T>(collectionName);
-            For<IMongoCollection<T>>().Use(collection);
+            For<IMongoCollection<T>>().Singleton().Use(collection);
         }
     }
 }
