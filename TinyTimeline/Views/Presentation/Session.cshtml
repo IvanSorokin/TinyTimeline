@@ -24,7 +24,13 @@ foreach (var e in Model.Events)
         @Html.ActionLink("Positive", "PositiveEvents", new {sessionId = Model.SessionId})
         @Html.ActionLink("Negative", "NegativeEvents", new {sessionId = Model.SessionId})
         @Html.ActionLink("Debatable", "DebatableEvents", new {sessionId = Model.SessionId})
+        
+        <br/>
         @Html.ActionLink("Add some events", "AddEvent", "Interaction", new {sessionId = Model.SessionId}, new { target = "_blank" })
+        @if (Model.Events.Any())
+        {
+            @Html.ActionLink("Vote!", "Voting", "Interaction", new {sessionId = Model.SessionId}, new {target = "_blank"})
+        }
     </div>
 }
 else

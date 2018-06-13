@@ -2,15 +2,17 @@
 
 @using (Html.BeginForm("SaveEvent", "Interaction", FormMethod.Post))
 {
-    <label>Date</label>
-    @Html.EditorFor(m => m.Date)
+    <div>
+        <label>Date</label>
+        @Html.EditorFor(m => m.Date)
 
-    <br/>
-    <label>Event description</label>
-    @Html.EditorFor(m => m.Text)
-    
-    @Html.HiddenFor(m => m.SessionId)
+        <br/>
+        <label>Event description</label>
+        @Html.EditorFor(m => m.Text)
 
-    <br/>
-    <input type="submit" value="Save event"/>
+        @Html.HiddenFor(m => m.SessionId)
+
+        <br/>
+        <input type="submit" value="Save event"/>
+    </div>
 }

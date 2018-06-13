@@ -66,5 +66,11 @@ namespace TinyTimeline.Controllers
                                     });
             return RedirectToAction("Sessions", "Presentation");
         }
+
+        public IActionResult DeleteSession(Guid sessionid)
+        {
+            sessionsRepository.Delete(sessionid);
+            return RedirectToAction("Sessions", "Presentation");
+        }
     }
 }

@@ -7,7 +7,8 @@
          <div>
              @session.Name at
              @Html.DisplayFor(m => session.CreateDate)
-             @Html.ActionLink("Go to", "Session", "Presentation", new {sessionId = session.SessionId})
+             @Html.ActionLink("Open", "Session", "Presentation", new {sessionId = session.SessionId})
+             @Html.ActionLink("Delete", "DeleteSession", "Interaction", new {sessionId = session.SessionId})
          </div>
      }
     <br/>
