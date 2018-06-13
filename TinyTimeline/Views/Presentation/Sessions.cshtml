@@ -1,0 +1,19 @@
+﻿@model TinyTimeline.Models.SessionsModel
+
+@if (Model.Sessions.Any())
+{
+    foreach (var session in Model.Sessions)
+     {
+         <div>
+             @session.Name at
+             @Html.DisplayFor(m => session.CreateDate)
+             @Html.ActionLink("Go to", "Session", "Presentation", new {sessionId = session.SessionId})
+         </div>
+     }
+    <br/>
+}
+else
+{
+    <label>Oops! No sessions. Create one!</label>
+}
+@Html.ActionLink("Create session", "AddSession", "Interaction")

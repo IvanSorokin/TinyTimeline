@@ -8,6 +8,8 @@
     <br/>
     <label>Event description</label>
     @Html.EditorFor(m => m.Text)
+    
+    @Html.HiddenFor(m => m.SessionId)
 
     <br/>
     <input type="submit" value="Save event"/>

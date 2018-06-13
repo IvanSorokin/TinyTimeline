@@ -1,4 +1,4 @@
-﻿@model TinyTimeline.Models.PresentationModel
+﻿@model TinyTimeline.Models.SessionModel
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
 
@@ -16,13 +16,13 @@
         @Html.DisplayFor(m => e.Text)
         <br/>
 
-        <button onclick="sendVote('@e.Id', true, '@nextId')">Like it!</button>
-        <button onclick="sendVote('@e.Id', false, '@nextId')">Dislike it!</button>
+        <button onclick="sendVote('@e.Id', '@Model.SessionId', true, '@nextId')">Like it!</button>
+        <button onclick="sendVote('@e.Id', '@Model.SessionId', false, '@nextId')">Dislike it!</button>
         <button onclick="skip('@e.Id', '@nextId')">Skip it!</button>
         <br/>
     </div>
 }
 
 <div hidden id="voteEnd">
-    Done! @Html.ActionLink("Watch timeline!", "Index", "Presentation")
+    Done! @Html.ActionLink("Watch timeline!", "Session", "Presentation", new {sessionId = Model.SessionId})
 </div>

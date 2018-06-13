@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using DataAccess.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -10,40 +10,53 @@ namespace TinyTimeline.Controllers
     public class PresentationController : Controller
     {
         private readonly ITimelineEventModelBuilder eventModelBuilder;
-        private readonly ITimelineEventsRepository eventsRepository;
+        private readonly ISessionModelBuilder sessionModelBuilder;
+        private readonly ISessionsRepository sessionsRepository;
 
-        public PresentationController(ITimelineEventsRepository eventsRepository,
-                                      ITimelineEventModelBuilder eventModelBuilder)
+        public PresentationController(ITimelineEventModelBuilder eventModelBuilder,
+                                      ISessionsRepository sessionsRepository,
+                                      ISessionModelBuilder sessionModelBuilder)
         {
-            this.eventsRepository = eventsRepository;
             this.eventModelBuilder = eventModelBuilder;
+            this.sessionsRepository = sessionsRepository;
+            this.sessionModelBuilder = sessionModelBuilder;
         }
 
-        public IActionResult Index()
+        public IActionResult Session(Guid sessionId)
         {
-            var events = eventModelBuilder.DateSortedBuild(eventsRepository.GetAll()).ToList();
-            return View(new PresentationModel{ Events = events });
+            var session = sessionsRepository.Get(sessionId);
+            var events = eventModelBuilder.DateSortedBuild(session.Events);
+            return View(new SessionModel
+                        {
+                            Events = events.ToArray(),
+                            Name = session.Name,
+                            CreateDate = session.CreateDate,
+                            SessionId = sessionId
+                        });
         }
 
-        public IActionResult PositiveEvents()
+        public IActionResult Sessions()
         {
-            var events = eventModelBuilder.DateSortedPositiveBuild(eventsRepository.GetAll()).ToList();
-            return View(new PresentationModel {Events = events});
-        }
-        
-        public IActionResult NegativeEvents()
-        {
-            var events = eventModelBuilder.DateSortedNegativeBuild(eventsRepository.GetAll()).ToList();
-            return View(new PresentationModel {Events = events});
-        }
-        
-        public IActionResult DebatableEvents()
-        {
-            var events = eventModelBuilder.DateSortedDebatableBuild(eventsRepository.GetAll()).ToList();
-            return View(new PresentationModel {Events = events});
+            var sessions = sessionsRepository.GetAll().Select(sessionModelBuilder.Build);
+            return View(new SessionsModel {Sessions = sessions});
         }
 
-        private IEnumerable<TimelineEventModel> GetAllEvents()
-            => eventModelBuilder.DateSortedBuild(eventsRepository.GetAll());
+        public IActionResult PositiveEvents(Guid sessionId)
+        {
+            var events = eventModelBuilder.DateSortedPositiveBuild(sessionsRepository.Get(sessionId).Events).ToList();
+            return View(new SessionModel {Events = events, SessionId = sessionId});
+        }
+
+        public IActionResult NegativeEvents(Guid sessionId)
+        {
+            var events = eventModelBuilder.DateSortedNegativeBuild(sessionsRepository.Get(sessionId).Events).ToList();
+            return View(new SessionModel {Events = events, SessionId = sessionId});
+        }
+
+        public IActionResult DebatableEvents(Guid sessionId)
+        {
+            var events = eventModelBuilder.DateSortedDebatableBuild(sessionsRepository.Get(sessionId).Events).ToList();
+            return View(new SessionModel {Events = events, SessionId = sessionId});
+        }
     }
 }

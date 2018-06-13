@@ -29,6 +29,7 @@
   </ItemGroup>
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Shared\_Layout.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Sessions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Views\Main\Voting.cs" />

@@ -1,0 +1,9 @@
+﻿@model TinyTimeline.Models.SessionModel
+
+@using (Html.BeginForm("SaveSession", "Interaction", FormMethod.Post))
+{
+    <label>Session name</label>
+    @Html.EditorFor(m => m.Name)
+    
+    <input type="submit" value="Save session"/>
+}

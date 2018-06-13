@@ -1,13 +1,14 @@
-﻿function sendVote(id, positive, nextId) {
+﻿function sendVote(eventId, sessionId, positive, nextId) {
     $.ajax({
             type: "POST",
             url: "/Interaction/Vote",
             data: {
                 isPositive: positive,
-                eventId: id
+                eventId: eventId,
+                sessionId: sessionId
             }
         });
-    $("#" + id).hide();
+    $("#" + eventId).hide();
     loadNext(nextId);
 }
 

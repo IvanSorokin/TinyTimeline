@@ -1,4 +1,4 @@
-﻿@model TinyTimeline.Models.PresentationModel
+﻿@model TinyTimeline.Models.SessionModel
 
 @if (Model.Events.Any())
 {
@@ -15,6 +15,6 @@
 else
 {
     <div>
-        <label>Nothing to debate, you should @Html.ActionLink("vote for events!", "Voting", "Interaction")</label>
+        <label>Nothing to debate, you should @Html.ActionLink("vote for events!", "Voting", "Interaction", new {sessionId = Model.SessionId})</label>
     </div>
 }

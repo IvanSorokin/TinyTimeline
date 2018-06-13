@@ -11,12 +11,11 @@ namespace DataAccess.Documents
         public Guid Id { get; set; }
         
         [BsonDateTimeOptions(DateOnly = true)] 
-        public DateTime Date { get; set; }
+        public DateTime CreateDate { get; set; }
 
-        [BsonRepresentation(BsonType.String)]
-        public TimelineEventDocument[] Events { get; set; }
-        
+        public TimelineEventDocument[] Events { get; set; }       
         public string Conclusion { get; set; }
         public string Plans { get; set; }
+        public string Name { get; set; }
     }
 }

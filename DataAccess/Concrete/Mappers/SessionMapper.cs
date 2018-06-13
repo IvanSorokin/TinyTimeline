@@ -19,10 +19,11 @@ namespace DataAccess.Concrete.Mappers
             return new SessionDocument
                    {
                        Id = obj.Id,
-                       Date = obj.Date,
+                       CreateDate = obj.CreateDate,
                        Events = obj.Events.Select(eventMapper.Map).ToArray(),
                        Conclusion = obj.Conclusion,
-                       Plans = obj.Plans
+                       Plans = obj.Plans,
+                       Name = obj.Name
                    };
         }
         
@@ -31,10 +32,11 @@ namespace DataAccess.Concrete.Mappers
             return new Session
                    {
                        Id = obj.Id,
-                       Date = obj.Date,
+                       CreateDate = obj.CreateDate,
                        Events = obj.Events.Select(eventMapper.Map).ToArray(),
                        Conclusion = obj.Conclusion,
-                       Plans = obj.Plans
+                       Plans = obj.Plans,
+                       Name = obj.Name
                    };
         }
     }

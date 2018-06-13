@@ -53,9 +53,14 @@ namespace DataAccess.Concrete.Repositories
             collection.UpdateOne(x => x.Id == sessionId, update);
         }
         
-        public IEnumerable<TimelineEvent> GetAllEvents(Guid sessionId)
+        public Session Get(Guid sessionId)
         {
-            return collection.Find(x => x.Id == sessionId).Single().Events.Select(eventsMapper.Map);
+            return sessionMapper.Map(collection.Find(x => x.Id == sessionId).Single());
+        }
+        
+        public IEnumerable<Session> GetAll()
+        {
+            return collection.Find(_ => true).ToEnumerable().Select(sessionMapper.Map);
         }
         
         public void Vote(Guid sessionId, Guid eventId, bool isPositive)

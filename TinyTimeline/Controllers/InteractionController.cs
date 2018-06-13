@@ -11,43 +11,60 @@ namespace TinyTimeline.Controllers
     public class InteractionController : Controller
     {
         private readonly ITimelineEventModelBuilder eventModelBuilder;
-        private readonly ITimelineEventsRepository timelineEventsRepository;
+        private readonly ISessionsRepository sessionsRepository;
 
-        public InteractionController(ITimelineEventsRepository timelineEventsRepository,
-                                     ITimelineEventModelBuilder eventModelBuilder)
+        public InteractionController(ITimelineEventModelBuilder eventModelBuilder,
+                                     ISessionsRepository sessionsRepository)
         {
-            this.timelineEventsRepository = timelineEventsRepository;
             this.eventModelBuilder = eventModelBuilder;
+            this.sessionsRepository = sessionsRepository;
         }
 
-        public IActionResult AddEvent() => View(new TimelineEventModel {Date = DateTime.Today.AddDays(-30)});
+        public IActionResult AddEvent(Guid sessionId) => View(new TimelineEventModel {Date = DateTime.Today.AddDays(-30), SessionId = sessionId});
+        
+        public IActionResult AddSession() => View(new SessionModel());
 
-        public IActionResult Voting()
+        public IActionResult Voting(Guid sessionId)
         {
-            var events = eventModelBuilder.DateSortedBuild(timelineEventsRepository.GetAll()).ToList();
-            return View(new PresentationModel
+            var events = eventModelBuilder.DateSortedBuild(sessionsRepository.Get(sessionId).Events).ToList();
+            return View(new SessionModel
                         {
-                            Events = events
+                            Events = events,
+                            SessionId = sessionId
                         });
         }
 
         [HttpPost]
         public IActionResult Vote(VoteModel vote)
         {
-            timelineEventsRepository.Vote(vote.EventId, vote.IsPositive);
+            sessionsRepository.Vote(vote.SessionId, vote.EventId, vote.IsPositive);
             return Json("");
         }
 
         [HttpPost]
         public IActionResult SaveEvent(TimelineEventModel model)
         {
-            timelineEventsRepository.Save(new TimelineEvent
+            sessionsRepository.AddEvent(model.SessionId,
+                                        new TimelineEvent
                                           {
                                               Id = Guid.NewGuid(),
                                               Date = model.Date.Date,
                                               Text = model.Text
                                           });
-            return RedirectToAction("AddEvent");
+            return RedirectToAction("AddEvent", new {sessionId = model.SessionId});
+        }
+
+        [HttpPost]
+        public IActionResult SaveSession(SessionModel model)
+        {
+            sessionsRepository.Save(new Session
+                                    {
+                                        CreateDate = DateTime.Today,
+                                        Id = Guid.NewGuid(),
+                                        Name = model.Name,
+                                        Events = new TimelineEvent[0]
+                                    });
+            return RedirectToAction("Sessions", "Presentation");
         }
     }
 }

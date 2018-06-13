@@ -6,5 +6,6 @@ namespace TinyTimeline.Models
     {
         public Guid EventId { get; set; }
         public bool IsPositive { get; set; }
+        public Guid SessionId { get; set; }
     }
 }

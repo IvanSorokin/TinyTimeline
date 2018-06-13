@@ -17,5 +17,7 @@ namespace TinyTimeline.Models
         public int Negative { get; set; }
 
         public Guid Id { get; set; }
+        
+        public Guid SessionId { get; set; }
     }
 }
