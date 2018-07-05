@@ -33,6 +33,10 @@
     height: 100px;
 }
 
+.float_right{
+    float: right;
+}
+
 .menu td {
     padding: 5px;
     border: 1px solid black;
