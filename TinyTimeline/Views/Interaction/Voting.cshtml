@@ -1,27 +1,32 @@
-﻿@model TinyTimeline.Models.SessionModel
+﻿@using TinyTimeline.Models
+@model SessionModel
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
 <link rel="stylesheet" href="~/css/site.css" />
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
 
 <div class="margin_top margin_left">
+    @Html.Partial("Menu", new MenuModel {SessionId = Model.SessionId})
     @foreach (var e in Model.Events)
     {
-        <div class="vote_item" id="@e.Id">
-            <label>Date: </label>
-            @Html.DisplayFor(m => e.Date)
-            <br/>
-    
-            <label>Content: </label>
-            @Html.DisplayFor(m => e.Text)
-            <br/>
-    
+        <div class="vote_item event" id="@e.Id">
+
+            <div>
+                <label>Date: </label>
+                @Html.DisplayFor(m => e.Date)
+            </div>
+
+            <div>
+                <label>Content: </label>
+                @Html.DisplayFor(m => e.Text)
+            </div>
+
             <button class="btn btn-primary btn-sm" onclick="sendVote('@e.Id', '@Model.SessionId', true)">Like it!</button>
             <button class="btn btn-primary btn-sm" onclick="sendVote('@e.Id', '@Model.SessionId', false)">Dislike it!</button>
             <button class="btn btn-primary btn-sm" onclick="skip('@e.Id')">Skip it!</button>
         </div>
     }
-    
+
     <div hidden id="voteEnd">
         Done! @Html.ActionLink("Watch timeline!", "Session", "Presentation", new {sessionId = Model.SessionId})
     </div>

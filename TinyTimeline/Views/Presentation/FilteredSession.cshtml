@@ -7,16 +7,17 @@
     @Html.Partial("Menu", new MenuModel {SessionId = Model.SessionId})
     
     <div class="margin_bottom">
-        Only @Html.DisplayFor(z => z.EventFilterType) events
+        <label>Only @Html.DisplayFor(z => z.EventFilterType) events</label>
     </div>
     
     @if (Model.Events.Any())
     {
         foreach (var e in Model.Events)
         {
-            <div>
+            <div class="event margin_bottom">
                 @Html.DisplayFor(m => e.Date):
                 @e.Text
+                +(@e.Positive) /
                 -(@e.Negative)
             </div>
         }

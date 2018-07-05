@@ -6,14 +6,14 @@
     @if (Model.Sessions.Any())
     {
         foreach (var session in Model.Sessions)
-         {
-             <div class="margin_bottom">
-                 @session.Name at
-                 @Html.DisplayFor(m => session.CreateDate)
-                 @Html.ActionLink("Open", "Session", "Presentation", new {sessionId = session.SessionId})
-                 @Html.ActionLink("Delete", "DeleteSession", "Interaction", new {sessionId = session.SessionId})
-             </div>
-         }
+        {
+            <div class="margin_bottom">
+                @session.Name at
+                @Html.DisplayFor(m => session.CreateDate)
+                @Html.ActionLink("Open", "Session", "Presentation", new {sessionId = session.SessionId})
+                @Html.ActionLink("Delete", "DeleteSession", "Interaction", new {sessionId = session.SessionId})
+            </div>
+        }
     }
     else
     {
