@@ -15,12 +15,7 @@
     {
         foreach (var e in Model.Events)
         {
-            <div class="event margin_bottom">
-                @Html.DisplayFor(m => e.Date):
-                @e.Text
-                +(@e.Positive) /
-                -(@e.Negative)
-            </div>
+            @Html.DisplayFor(m => e)
         }
         <div>
             @Html.ActionLink("Positive", "FilteredSession", new {sessionId = Model.SessionId, filterType = EventFilterType.Positive})

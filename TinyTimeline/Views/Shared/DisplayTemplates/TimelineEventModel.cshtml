@@ -1,0 +1,9 @@
+﻿@model TinyTimeline.Models.TimelineEventModel
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+
+<div class="event margin_bottom">
+    <label>@Html.DisplayFor(m => m.Date):</label>
+    @Model.Text
+    <label>+(@Model.Positive) / -(@Model.Negative)</label>
+</div>
