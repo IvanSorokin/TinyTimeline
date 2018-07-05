@@ -8,7 +8,7 @@
     {
         foreach (var session in Model.Sessions)
         {
-            <div class="margin_bottom">
+            <div class="margin_bottom bordered_fill session">
                 @Html.ActionLink($"{session.Name}", "Session", "Presentation", new {sessionId = session.SessionId}) at @Html.DisplayFor(m => session.CreateDate)
                 @Html.ActionLink("Delete", "DeleteSession", "Interaction", new {sessionId = session.SessionId})
             </div>

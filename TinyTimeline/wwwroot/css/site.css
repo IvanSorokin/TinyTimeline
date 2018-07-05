@@ -15,8 +15,12 @@
 }
 
 .event{
-    width: 400px;
-    word-break: break-all;
+    width: 600px;
+    word-break: break-word;
+}
+
+.session{
+    width: 600px;
 }
 
 .menu{
@@ -24,7 +28,19 @@
     border-collapse: collapse;
 }
 
+.event_desciption{
+    width: 400px;
+    height: 100px;
+}
+
 .menu td {
     padding: 5px;
     border: 1px solid black;
+}
+
+.bordered_fill {
+    border: 1px solid black;
+    background: rgba(232, 230, 244, 0.12);
+    padding: 10px;
+    width: 600px;
 }

@@ -1,7 +1,7 @@
 ﻿@model TinyTimeline.Models.MenuModel
 <link rel="stylesheet" href="~/css/site.css"/>
 
-<table class="menu margin_bottom">
+<table class="menu margin_bottom bordered_fill">
     <tr>
         <td>@Html.ActionLink("All sessions", "Sessions", "Presentation")</td>
         <td>@Html.ActionLink("Current session", "Session", "Presentation", new {sessionId = Model.SessionId})</td>

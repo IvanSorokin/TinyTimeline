@@ -3,20 +3,26 @@
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
 <link rel="stylesheet" href="~/css/site.css" />
 
-@using (Html.BeginForm("SaveEvent", "Interaction", FormMethod.Post))
-{
+<form action="/Interaction/SaveEvent" method="post">    
     <div class="margin_top margin_left">
         @Html.Partial("Menu", new MenuModel{SessionId = Model.SessionId})
-        <label>Date</label>
-        @Html.EditorFor(m => m.Date)
+        
+        <div class="margin_bottom">
+            <label>Date</label>
+            <div>
+                <input data-val="true" data-val-required="The Date field is required." id="Date" name="Date" type="date">
+            </div>
+        </div>
 
-        <br/>
         <label>Event description</label>
-        @Html.EditorFor(m => m.Text)
+        <div>
+            <textarea class="event_desciption" id="Text" name="Text" type="text" value=""></textarea>
+        </div>
 
-        @Html.HiddenFor(m => m.SessionId)
+        <input data-val="true" id="SessionId" name="SessionId" type="hidden" value="@Model.SessionId">
 
-        <br/>
-        <input type="submit" class="btn btn-primary btn-sm" value="Save event"/>
+        <div class="margin_top">
+            <input type="submit" class="btn btn-primary btn-sm" value="Save event">
+        </div>
     </div>
-}
+</form>

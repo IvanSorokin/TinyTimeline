@@ -2,8 +2,10 @@
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
 <link rel="stylesheet" href="~/css/site.css" />
 
-<div class="event margin_bottom">
+<div class="event margin_bottom bordered_fill">
     <label>@Html.DisplayFor(m => m.Date):</label>
     <label>+(@Model.Positive) / -(@Model.Negative)</label>
-    @Model.Text
+    <div>
+        @Model.Text
+    </div>
 </div>

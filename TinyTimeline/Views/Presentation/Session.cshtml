@@ -6,7 +6,7 @@
 <div class="margin_left margin_top">
     @Html.Partial("Menu", new MenuModel {SessionId = Model.SessionId})
 
-    <div class="margin_bottom">
+    <div class="margin_bottom bordered_fill width">
         Session: @Model.Name,
         created at @Html.DisplayFor(m => m.CreateDate)
     </div>
@@ -18,22 +18,23 @@
             @Html.DisplayFor(m => e)
         }
         <div>
-            @Html.ActionLink("Positive", "FilteredSession", new {sessionId = Model.SessionId, filterType = EventFilterType.Positive})
-            @Html.ActionLink("Negative", "FilteredSession", new {sessionId = Model.SessionId, filterType = EventFilterType.Negative})
-            @Html.ActionLink("Debatable", "FilteredSession", new {sessionId = Model.SessionId, filterType = EventFilterType.Debatable})
+            <div class="margin_bottom">
+                @Html.ActionLink("Positive", "FilteredSession", new {sessionId = Model.SessionId, filterType = EventFilterType.Positive},new {@class = "btn btn-primary btn-sm"})
+                @Html.ActionLink("Negative", "FilteredSession", new {sessionId = Model.SessionId, filterType = EventFilterType.Negative},new {@class = "btn btn-primary btn-sm"})
+                @Html.ActionLink("Debatable", "FilteredSession", new {sessionId = Model.SessionId, filterType = EventFilterType.Debatable},new {@class = "btn btn-primary btn-sm"})
+            </div>
 
-            <br/>
-            @Html.ActionLink("Add some events", "AddEvent", "Interaction", new {sessionId = Model.SessionId}, new {target = "_blank"})
+            @Html.ActionLink("Add some events", "AddEvent", "Interaction", new {sessionId = Model.SessionId}, new {@class = "btn btn-primary btn-sm"})
             @if (Model.Events.Any())
             {
-                @Html.ActionLink("Vote!", "Voting", "Interaction", new {sessionId = Model.SessionId}, new {target = "_blank"})
+                @Html.ActionLink("Vote", "Voting", "Interaction", new {sessionId = Model.SessionId}, new {@class = "btn btn-primary btn-sm"})
             }
         </div>
     }
     else
     {
         <div>
-            <label>@Html.ActionLink("Add some events", "AddEvent", "Interaction", new {sessionId = Model.SessionId}, new {target = "_blank"}) to see the magic.</label>
+            <label>@Html.ActionLink("Add some events", "AddEvent", "Interaction", new {sessionId = Model.SessionId}, new {@class = "btn btn-primary btn-sm"})</label>
         </div>
     }
 </div>
