@@ -1,0 +1,30 @@
+﻿@using TinyTimeline.Models
+@model FilteredSessionModel
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+
+<div class="margin_left margin_top">
+    @Html.Partial("Menu", new MenuModel {SessionId = Model.SessionId})
+    
+    <div class="margin_bottom">
+        Only @Html.DisplayFor(z => z.EventFilterType) events
+    </div>
+    
+    @if (Model.Events.Any())
+    {
+        foreach (var e in Model.Events)
+        {
+            <div>
+                @Html.DisplayFor(m => e.Date):
+                @e.Text
+                -(@e.Negative)
+            </div>
+        }
+    }
+    else
+    {
+        <div>
+            <label>No events, but you can change it, so @Html.ActionLink("vote for events!", "Voting", "Interaction", new {sessionId = Model.SessionId})</label>
+        </div>
+    }
+</div>

@@ -11,7 +11,7 @@ namespace TinyTimeline.Models
         public DateTime Date { get; set; }
         
         public string Name { get; set; }
-        public  ICollection<TimelineEventModel> Events { get; set; }
+        public IEnumerable<TimelineEventModel> Events { get; set; }
         public string Conclusion { get; set; }
         public string Plans { get; set; }
         

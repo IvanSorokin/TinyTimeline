@@ -1,9 +1,9 @@
 ﻿@model TinyTimeline.Models.MenuModel
-<link rel="stylesheet" href="~/css/site.css" />
+<link rel="stylesheet" href="~/css/site.css"/>
 
 <table class="menu margin_bottom">
-        <tr>
-                <td>@Html.ActionLink("All sessions", "Sessions", "Presentation")</td>
-                <td>@Html.ActionLink("Current session", "Session", "Presentation",new {sessionId = Model.SessionId})</td>
-        </tr>
+    <tr>
+        <td>@Html.ActionLink("All sessions", "Sessions", "Presentation")</td>
+        <td>@Html.ActionLink("Current session", "Session", "Presentation", new {sessionId = Model.SessionId})</td>
+    </tr>
 </table>

@@ -1,35 +1,34 @@
 ﻿@using TinyTimeline.Models
 @model SessionModel
-<link rel="stylesheet" href="~/css/site.css" />
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="~/css/site.css"/>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
 
 <div class="margin_left margin_top">
-    @Html.Partial("Menu", new MenuModel{SessionId = Model.SessionId})
-    
+    @Html.Partial("Menu", new MenuModel {SessionId = Model.SessionId})
+
     <div class="margin_bottom">
         Session: @Model.Name,
         created at @Html.DisplayFor(m => m.CreateDate)
     </div>
-    
+
     @if (Model.Events.Any())
     {
-    
-    foreach (var e in Model.Events)
-     {
-         <div class="event margin_bottom">
-             @Html.DisplayFor(m => e.Date):
-             @e.Text
-             +(@e.Positive) /
-             -(@e.Negative)
-         </div>
-     }
+        foreach (var e in Model.Events)
+        {
+            <div class="event margin_bottom">
+                @Html.DisplayFor(m => e.Date):
+                @e.Text
+                +(@e.Positive) /
+                -(@e.Negative)
+            </div>
+        }
         <div>
-            @Html.ActionLink("Positive", "PositiveEvents", new {sessionId = Model.SessionId})
-            @Html.ActionLink("Negative", "NegativeEvents", new {sessionId = Model.SessionId})
-            @Html.ActionLink("Debatable", "DebatableEvents", new {sessionId = Model.SessionId})
-            
+            @Html.ActionLink("Positive", "FilteredSession", new {sessionId = Model.SessionId, filterType = EventFilterType.Positive})
+            @Html.ActionLink("Negative", "FilteredSession", new {sessionId = Model.SessionId, filterType = EventFilterType.Negative})
+            @Html.ActionLink("Debatable", "FilteredSession", new {sessionId = Model.SessionId, filterType = EventFilterType.Debatable})
+
             <br/>
-            @Html.ActionLink("Add some events", "AddEvent", "Interaction", new {sessionId = Model.SessionId}, new { target = "_blank" })
+            @Html.ActionLink("Add some events", "AddEvent", "Interaction", new {sessionId = Model.SessionId}, new {target = "_blank"})
             @if (Model.Events.Any())
             {
                 @Html.ActionLink("Vote!", "Voting", "Interaction", new {sessionId = Model.SessionId}, new {target = "_blank"})
@@ -39,7 +38,7 @@
     else
     {
         <div>
-            <label>@Html.ActionLink("Add some events", "AddEvent", "Interaction", new {sessionId = Model.SessionId}, new { target = "_blank" }) to see the magic.</label>
+            <label>@Html.ActionLink("Add some events", "AddEvent", "Interaction", new {sessionId = Model.SessionId}, new {target = "_blank"}) to see the magic.</label>
         </div>
     }
 </div>

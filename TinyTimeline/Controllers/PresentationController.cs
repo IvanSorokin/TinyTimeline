@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -37,26 +38,33 @@ namespace TinyTimeline.Controllers
 
         public IActionResult Sessions()
         {
-            var sessions = sessionsRepository.GetAll().Select(sessionModelBuilder.Build);
+            var sessions = sessionsRepository.GetSessions().Select(sessionModelBuilder.Build);
             return View(new SessionsModel {Sessions = sessions});
         }
 
-        public IActionResult PositiveEvents(Guid sessionId)
+        public IActionResult FilteredSession(Guid sessionId, EventFilterType filterType)
         {
-            var events = eventModelBuilder.DateSortedPositiveBuild(sessionsRepository.Get(sessionId).Events).ToList();
-            return View(new SessionModel {Events = events, SessionId = sessionId});
-        }
-
-        public IActionResult NegativeEvents(Guid sessionId)
-        {
-            var events = eventModelBuilder.DateSortedNegativeBuild(sessionsRepository.Get(sessionId).Events).ToList();
-            return View(new SessionModel {Events = events, SessionId = sessionId});
-        }
-
-        public IActionResult DebatableEvents(Guid sessionId)
-        {
-            var events = eventModelBuilder.DateSortedDebatableBuild(sessionsRepository.Get(sessionId).Events).ToList();
-            return View(new SessionModel {Events = events, SessionId = sessionId});
+            IEnumerable<TimelineEventModel> events;
+            switch (filterType)
+            {
+                case EventFilterType.Positive:
+                    events = eventModelBuilder.DateSortedPositiveBuild(sessionsRepository.Get(sessionId).Events);
+                    break;
+                case EventFilterType.Debatable:
+                    events = eventModelBuilder.DateSortedDebatableBuild(sessionsRepository.Get(sessionId).Events);
+                    break;
+                case EventFilterType.Negative:
+                    events = eventModelBuilder.DateSortedNegativeBuild(sessionsRepository.Get(sessionId).Events);
+                    break;
+                default:
+                    return NotFound();
+            }
+            return View(new FilteredSessionModel
+                        {
+                            Events = events,
+                            SessionId = sessionId,
+                            EventFilterType = filterType
+                        });
         }
     }
 }

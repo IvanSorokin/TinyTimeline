@@ -11,7 +11,7 @@ namespace DataAccess.Interfaces.Repositories
         void AddEvent(Guid sessionId, TimelineEvent timelineEvent);
         void RemoveEvent(Guid sessionId, Guid eventId);
         Session Get(Guid sessionId);
-        IEnumerable<Session> GetAll();
+        IEnumerable<Session> GetSessions();
         void Vote(Guid sessionId, Guid eventId, bool isPositive);
     }
 }

@@ -58,7 +58,7 @@ namespace DataAccess.Concrete.Repositories
             return sessionMapper.Map(collection.Find(x => x.Id == sessionId).Single());
         }
         
-        public IEnumerable<Session> GetAll()
+        public IEnumerable<Session> GetSessions()
         {
             return collection.Find(_ => true).ToEnumerable().Select(sessionMapper.Map);
         }
