@@ -1,15 +1,18 @@
 ﻿@model TinyTimeline.Models.SessionModel
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-<link rel="stylesheet" href="~/css/site.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
+<link rel="stylesheet" href="~/css/site.css"/>
 
 <div class="margin_left margin_top">
     @using (Html.BeginForm("SaveSession", "Interaction", FormMethod.Post))
     {
-        <label>Session name</label>
-        @Html.EditorFor(m => m.Name)
-        
         <div>
-            <input class="btn btn-primary btn-sm" type="submit" value="Save session"/>
+            <label>Session name</label>
         </div>
+
+        <div class="margin_bottom">
+            @Html.EditorFor(m => m.Name)
+        </div>
+
+        <input class="btn btn-primary btn-sm" type="submit" value="Save session"/>
     }
 </div>

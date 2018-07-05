@@ -3,14 +3,13 @@
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
 
 <div class="margin_left margin_top">
+    <label>All sessions created so far</label>
     @if (Model.Sessions.Any())
     {
         foreach (var session in Model.Sessions)
         {
             <div class="margin_bottom">
-                @session.Name at
-                @Html.DisplayFor(m => session.CreateDate)
-                @Html.ActionLink("Open", "Session", "Presentation", new {sessionId = session.SessionId})
+                @Html.ActionLink($"{session.Name}", "Session", "Presentation", new {sessionId = session.SessionId}) at @Html.DisplayFor(m => session.CreateDate)
                 @Html.ActionLink("Delete", "DeleteSession", "Interaction", new {sessionId = session.SessionId})
             </div>
         }
@@ -19,6 +18,6 @@
     {
         <label>Oops! No sessions. Create one!</label>
     }
-    @Html.ActionLink("Create session", "AddSession", "Interaction")
+    @Html.ActionLink("Create session", "AddSession", "Interaction", new {}, new {@class = "btn btn-primary btn-sm"})
 </div>
 
