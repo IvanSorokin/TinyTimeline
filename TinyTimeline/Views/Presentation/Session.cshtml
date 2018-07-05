@@ -24,7 +24,7 @@
                 @Html.ActionLink("Debatable", "FilteredSession", new {sessionId = Model.SessionId, filterType = EventFilterType.Debatable},new {@class = "btn btn-primary btn-sm"})
             </div>
 
-            @Html.ActionLink("Add some events", "AddEvent", "Interaction", new {sessionId = Model.SessionId}, new {@class = "btn btn-primary btn-sm"})
+            @Html.ActionLink("Add event", "AddEvent", "Interaction", new {sessionId = Model.SessionId}, new {@class = "btn btn-primary btn-sm"})
             @if (Model.Events.Any())
             {
                 @Html.ActionLink("Vote", "Voting", "Interaction", new {sessionId = Model.SessionId}, new {@class = "btn btn-primary btn-sm"})
@@ -34,7 +34,7 @@
     else
     {
         <div>
-            <label>@Html.ActionLink("Add some events", "AddEvent", "Interaction", new {sessionId = Model.SessionId}, new {@class = "btn btn-primary btn-sm"})</label>
+            <label>@Html.ActionLink("Add event", "AddEvent", "Interaction", new {sessionId = Model.SessionId}, new {@class = "btn btn-primary btn-sm"})</label>
         </div>
     }
 </div>
