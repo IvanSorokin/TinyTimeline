@@ -1,8 +1,12 @@
-﻿@model TinyTimeline.Models.TimelineEventModel
+﻿@using TinyTimeline.Models
+@model TimelineEventModel
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="~/css/site.css" />
 
 @using (Html.BeginForm("SaveEvent", "Interaction", FormMethod.Post))
 {
-    <div>
+    <div class="margin_top margin_left">
+        @Html.Partial("Menu", new MenuModel{SessionId = Model.SessionId})
         <label>Date</label>
         @Html.EditorFor(m => m.Date)
 
@@ -13,6 +17,6 @@
         @Html.HiddenFor(m => m.SessionId)
 
         <br/>
-        <input type="submit" value="Save event"/>
+        <input type="submit" class="btn btn-primary btn-sm" value="Save event"/>
     </div>
 }

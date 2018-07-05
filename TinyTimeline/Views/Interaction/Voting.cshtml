@@ -1,28 +1,28 @@
 ﻿@model TinyTimeline.Models.SessionModel
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+<link rel="stylesheet" href="~/css/site.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
 
-@for (var i = 0; i < Model.Events.Count; i++)
-{
-    var e = Model.Events.ElementAt(i);
-    var nextId = i == Model.Events.Count - 1 ? (Guid?) null : Model.Events.ElementAt(i + 1).Id;
-
-    <div @(i == 0 ? "" : "hidden") class="vote_item" id="@e.Id">
-        <label>Date: </label>
-        @Html.DisplayFor(m => e.Date)
-        <br/>
-
-        <label>Content: </label>
-        @Html.DisplayFor(m => e.Text)
-        <br/>
-
-        <button onclick="sendVote('@e.Id', '@Model.SessionId', true, '@nextId')">Like it!</button>
-        <button onclick="sendVote('@e.Id', '@Model.SessionId', false, '@nextId')">Dislike it!</button>
-        <button onclick="skip('@e.Id', '@nextId')">Skip it!</button>
-        <br/>
+<div class="margin_top margin_left">
+    @foreach (var e in Model.Events)
+    {
+        <div class="vote_item" id="@e.Id">
+            <label>Date: </label>
+            @Html.DisplayFor(m => e.Date)
+            <br/>
+    
+            <label>Content: </label>
+            @Html.DisplayFor(m => e.Text)
+            <br/>
+    
+            <button class="btn btn-primary btn-sm" onclick="sendVote('@e.Id', '@Model.SessionId', true)">Like it!</button>
+            <button class="btn btn-primary btn-sm" onclick="sendVote('@e.Id', '@Model.SessionId', false)">Dislike it!</button>
+            <button class="btn btn-primary btn-sm" onclick="skip('@e.Id')">Skip it!</button>
+        </div>
+    }
+    
+    <div hidden id="voteEnd">
+        Done! @Html.ActionLink("Watch timeline!", "Session", "Presentation", new {sessionId = Model.SessionId})
     </div>
-}
-
-<div hidden id="voteEnd">
-    Done! @Html.ActionLink("Watch timeline!", "Session", "Presentation", new {sessionId = Model.SessionId})
 </div>

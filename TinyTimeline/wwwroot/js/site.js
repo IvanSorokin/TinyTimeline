@@ -1,7 +1,7 @@
-﻿function sendVote(eventId, sessionId, positive, nextId) {
+﻿function sendVote(eventId, sessionId, positive) {
     $.ajax({
-            type: "POST",
-            url: "/Interaction/Vote",
+            type: 'POST',
+            url: '/Interaction/Vote',
             data: {
                 isPositive: positive,
                 eventId: eventId,
@@ -9,17 +9,15 @@
             }
         });
     $("#" + eventId).hide();
-    loadNext(nextId);
+    checkIfDone();
 }
 
-function skip(currentId, nextId) {
+function skip(currentId) {
     $("#" + currentId).hide();
-    loadNext(nextId);
+    checkIfDone();
 }
 
-function loadNext(nextId) {
-    if (!nextId)
+function checkIfDone() {
+    if ($('.vote_item').filter(":hidden" ).length == $('.vote_item').length)
         $("#voteEnd").show();
-    else
-        $("#" + nextId).show();
 }

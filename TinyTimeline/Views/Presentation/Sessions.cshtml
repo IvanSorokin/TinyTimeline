@@ -1,20 +1,24 @@
 ﻿@model TinyTimeline.Models.SessionsModel
+<link rel="stylesheet" href="~/css/site.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
 
-@if (Model.Sessions.Any())
-{
-    foreach (var session in Model.Sessions)
-     {
-         <div>
-             @session.Name at
-             @Html.DisplayFor(m => session.CreateDate)
-             @Html.ActionLink("Open", "Session", "Presentation", new {sessionId = session.SessionId})
-             @Html.ActionLink("Delete", "DeleteSession", "Interaction", new {sessionId = session.SessionId})
-         </div>
-     }
-    <br/>
-}
-else
-{
-    <label>Oops! No sessions. Create one!</label>
-}
-@Html.ActionLink("Create session", "AddSession", "Interaction")
+<div class="margin_left margin_top">
+    @if (Model.Sessions.Any())
+    {
+        foreach (var session in Model.Sessions)
+         {
+             <div class="margin_bottom">
+                 @session.Name at
+                 @Html.DisplayFor(m => session.CreateDate)
+                 @Html.ActionLink("Open", "Session", "Presentation", new {sessionId = session.SessionId})
+                 @Html.ActionLink("Delete", "DeleteSession", "Interaction", new {sessionId = session.SessionId})
+             </div>
+         }
+    }
+    else
+    {
+        <label>Oops! No sessions. Create one!</label>
+    }
+    @Html.ActionLink("Create session", "AddSession", "Interaction")
+</div>
+
