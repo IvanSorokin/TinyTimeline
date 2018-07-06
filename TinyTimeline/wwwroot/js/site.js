@@ -59,6 +59,20 @@ function deleteEvent(eventId, sessionId) {
     });
 }
 
+function deleteReview(reviewId, sessionId) {
+    $.ajax({
+        type: 'DELETE',
+        url: '/Interaction/DeleteReview',
+        data: {
+            reviewId: reviewId,
+            sessionId: sessionId
+        },
+        success: function () {
+            $("#" + reviewId).hide();
+        }
+    });
+}
+
 function skip(currentId) {
     $("#" + currentId).hide();
     checkIfDone();

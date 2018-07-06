@@ -9,14 +9,16 @@ namespace DataAccess.Concrete.Mappers
         public ReviewDocument Map(Review obj) => new ReviewDocument
         {
             Content = obj.Content,
-            Rating = obj.Rating
+            Rating = obj.Rating,
+            Id = obj.Id
         };
 
 
         public Review Map(ReviewDocument obj) => new Review
         {
             Content = obj.Content,
-            Rating = obj.Rating
+            Rating = obj.Rating,
+            Id = obj.Id
         };
     }
 }

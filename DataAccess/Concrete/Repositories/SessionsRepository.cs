@@ -39,7 +39,7 @@ namespace DataAccess.Concrete.Repositories
                                   new UpdateOptions {IsUpsert = true});
         }
 
-        public void Delete(Guid id)
+        public void DeleteSession(Guid id)
         {
             collection.DeleteOne(x => x.Id == id);
         }
@@ -53,6 +53,12 @@ namespace DataAccess.Concrete.Repositories
         public void AddReview(Guid sessionId, Review review)
         {
             var update = Builders<SessionDocument>.Update.AddToSet(x => x.Reviews, reviewMapper.Map(review));
+            collection.UpdateOne(x => x.Id == sessionId, update);
+        }
+
+        public void RemoveReview(Guid sessionId, Guid reviewId)
+        {
+            var update = Builders<SessionDocument>.Update.PullFilter(x => x.Reviews, y => y.Id == reviewId);
             collection.UpdateOne(x => x.Id == sessionId, update);
         }
 

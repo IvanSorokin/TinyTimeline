@@ -39,7 +39,9 @@ namespace TinyTimeline.Controllers
                                      .Select(x => new ReviewModel
                                                   {
                                                       Content = x.Content,
-                                                      Rating = x.Rating
+                                                      Rating = x.Rating,
+                                                      Id = x.Id,
+                                                      SessionId = sessionId
                                                   }),
                             SessionId = sessionId
                         });

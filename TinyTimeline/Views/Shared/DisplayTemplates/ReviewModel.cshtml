@@ -2,16 +2,23 @@
 
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
 <link rel="stylesheet" href="~/css/site.css"/>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
 
-<div class="event margin_bottom bordered_fill">
-    <div>
-        <label>Rating:</label>
-         @Model.Rating
-    </div>
-    <div>
-        <label>Content:</label>
+<div class="event margin_bottom bordered_fill" id="@Model.Id">
+    <div style="padding-bottom: 20px">
         <div>
-            @Model.Content
+            <label>Rating:</label>
+            @Model.Rating
         </div>
+        <div>
+            <label>Content:</label>
+            <div>
+                @Model.Content
+            </div>
+        </div>
+    </div>
+    <div class="float_right" style="margin-top: -20px">
+        <a class="btn btn-danger btn-xs" style="cursor: pointer" onclick="deleteReview('@Model.Id', '@Model.SessionId')">Delete</a>
     </div>
 </div>

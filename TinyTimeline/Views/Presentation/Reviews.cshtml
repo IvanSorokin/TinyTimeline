@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="~/css/site.css"/>
 
 <div class="margin_left margin_top">
-@Html.Partial("Menu", new MenuModel{SessionId = Model.SessionId})
+    @Html.Partial("Menu", new MenuModel {SessionId = Model.SessionId})
     @foreach (var review in Model.Reviews)
     {
         @Html.DisplayFor(m => review)

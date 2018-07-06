@@ -20,8 +20,11 @@ namespace TinyTimeline.Controllers
             this.sessionsRepository = sessionsRepository;
         }
 
-        public IActionResult AddEvent(Guid sessionId) =>
-            View(new TimelineEventModel {Date = DateTime.Today.AddDays(-30), SessionId = sessionId});
+        public IActionResult AddEvent(Guid sessionId) => View(new TimelineEventModel
+                                                              {
+                                                                  Date = DateTime.Today.AddDays(-30),
+                                                                  SessionId = sessionId
+                                                              });
 
         public IActionResult AddSession() => View(new SessionModel());
 
@@ -100,20 +103,33 @@ namespace TinyTimeline.Controllers
                                     });
             return RedirectToAction("Sessions", "Presentation");
         }
-        
+
+        public IActionResult DeleteSession(Guid sessionid)
+        {
+            sessionsRepository.DeleteSession(sessionid);
+            return RedirectToAction("Sessions", "Presentation");
+        }
+
         [HttpPost]
         public IActionResult SaveReview(ReviewModel model)
         {
-            sessionsRepository.AddReview(model.SessionId, new Review {Content = model.Content, Rating = model.Rating});
+            sessionsRepository.AddReview(model.SessionId,
+                                         new Review
+                                         {
+                                             Content = model.Content,
+                                             Rating = model.Rating,
+                                             Id = Guid.NewGuid()
+                                         });
             return RedirectToAction("Reviews", "Presentation", new {sessionId = model.SessionId});
         }
 
         public IActionResult AddReview(Guid sessionId) => View(new ReviewModel {SessionId = sessionId});
 
-        public IActionResult DeleteSession(Guid sessionid)
+        [HttpDelete]
+        public IActionResult DeleteReview(Guid sessionId, Guid reviewId)
         {
-            sessionsRepository.Delete(sessionid);
-            return RedirectToAction("Sessions", "Presentation");
+            sessionsRepository.RemoveReview(sessionId, reviewId);
+            return Json("");
         }
     }
 }

@@ -15,13 +15,15 @@
         </div>
     }
     <div>
-        @Model.Text
-        @if (Model.ToBeDiscussed > 0)
-        {
-            <div class="margin_top">
-                <textarea class="event_desciption" id=@($"conclusion{Model.Id}")  name="Text" type="text" value="" placeholder="Write your conclusion for event">@Model.Conclusion</textarea>
-            </div>
-        }
+        <div style="padding-bottom: 20px">
+            @Model.Text
+            @if (Model.ToBeDiscussed > 0)
+            {
+                <div class="margin_top">
+                    <textarea class="event_desciption" id=@($"conclusion{Model.Id}")  name="Text" type="text" value="" placeholder="Write your conclusion for event">@Model.Conclusion</textarea>
+                </div>
+            }
+        </div>
 
         @if (Model.ToBeDiscussed > 0)
         {
@@ -32,7 +34,7 @@
         }
         else
         {
-            <div class="float_right">
+            <div class="float_right" style="margin-top: -20px">
                 <a class="btn btn-danger btn-xs" style="cursor: pointer" onclick="deleteEvent('@Model.Id', '@Model.SessionId')">Delete event</a>
             </div>
         }
