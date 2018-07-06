@@ -14,10 +14,7 @@
     <div class="margin_bottom">
         <label>@Html.DisplayFor(z => z.EventFilterType) events</label>
     </div>
-
-    @if (Model.Events.Any())
-    {
-        foreach (var e in Model.Events)
+        @foreach (var e in Model.Events)
         {
             @Html.DisplayFor(m => e)
         }
@@ -26,12 +23,4 @@
             @Html.ActionLink("Add event", "AddEvent", "Interaction", new {sessionId = Model.SessionId}, new {@class = "btn btn-primary btn-sm"})
             @Html.ActionLink("Vote", "Voting", "Interaction", new {sessionId = Model.SessionId}, new {@class = "btn btn-primary btn-sm"})
         </div>
-    }
-    else
-    {
-        @Html.Partial("TimelineEventFilters", Model.SessionId)
-        <div>
-            <label>@Html.ActionLink("Add event", "AddEvent", "Interaction", new {sessionId = Model.SessionId}, new {@class = "btn btn-primary btn-sm"})</label>
-        </div>
-    }
 </div>

@@ -27,6 +27,9 @@ namespace TinyTimeline.Controllers
         public IActionResult Voting(Guid sessionId)
         {
             var events = eventModelBuilder.DateSortedBuild(sessionsRepository.Get(sessionId)).ToList();
+            if (!events.Any())
+                return RedirectToAction("AddEvent", "Interaction", new {sessionId = sessionId});
+            
             return View(new SessionModel
                         {
                             Events = events,

@@ -3,9 +3,9 @@
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
 
 <div class="margin_left margin_top">
-    <label>All sessions created so far</label>
     @if (Model.Sessions.Any())
     {
+        <label>All sessions created so far</label>
         foreach (var session in Model.Sessions)
         {
             <div class="margin_bottom bordered_fill session">
@@ -16,7 +16,9 @@
     }
     else
     {
-        <label>Oops! No sessions. Create one!</label>
+        <div>
+            <label>Oops! No sessions. Create one!</label>
+        </div>
     }
     @Html.ActionLink("Create session", "AddSession", "Interaction", new {}, new {@class = "btn btn-primary btn-sm"})
 </div>
