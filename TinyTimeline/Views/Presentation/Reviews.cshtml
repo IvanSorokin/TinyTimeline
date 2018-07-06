@@ -1,0 +1,15 @@
+﻿@using TinyTimeline.Models
+@model ReviewsModel
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
+<link rel="stylesheet" href="~/css/site.css"/>
+
+<div class="margin_left margin_top">
+@Html.Partial("Menu", new MenuModel{SessionId = Model.SessionId})
+    @foreach (var review in Model.Reviews)
+    {
+        @Html.DisplayFor(m => review)
+    }
+
+    @Html.ActionLink("Add review", "AddReview", "Interaction", new {sessionId = Model.SessionId}, new {@class = "btn btn-primary btn-sm"})
+</div>

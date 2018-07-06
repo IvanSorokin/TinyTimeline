@@ -18,6 +18,7 @@ namespace DataAccess
             RegisterCollection<SessionDocument>("sessions");
             For(typeof(ITwoWayMapper<TimelineEventDocument, TimelineEvent>)).Use(typeof(TimelineEventsMapper));
             For(typeof(ITwoWayMapper<SessionDocument, Session>)).Use(typeof(SessionMapper));
+            For(typeof(ITwoWayMapper<ReviewDocument, Review>)).Use(typeof(ReviewMapper));
         }
 
         private void RegisterCollection<T>(string collectionName)

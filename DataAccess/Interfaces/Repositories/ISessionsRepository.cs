@@ -10,6 +10,7 @@ namespace DataAccess.Interfaces.Repositories
         void Delete(Guid id);
         void AddEvent(Guid sessionId, TimelineEvent timelineEvent);
         void RemoveEvent(Guid sessionId, Guid eventId);
+        void AddReview(Guid sessionId, Review review);
         Session Get(Guid sessionId);
         IEnumerable<Session> GetSessions();
         void Vote(Guid sessionId, Guid eventId, bool isPositive);

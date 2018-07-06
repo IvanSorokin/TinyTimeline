@@ -1,0 +1,17 @@
+﻿@model TinyTimeline.Models.ReviewModel
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
+<link rel="stylesheet" href="~/css/site.css"/>
+
+<div class="event margin_bottom bordered_fill">
+    <div>
+        <label>Rating:</label>
+         @Model.Rating
+    </div>
+    <div>
+        <label>Content:</label>
+        <div>
+            @Model.Content
+        </div>
+    </div>
+</div>

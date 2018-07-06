@@ -1,0 +1,29 @@
+﻿@using TinyTimeline.Models
+@model ReviewModel
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
+<link rel="stylesheet" href="~/css/site.css"/>
+
+<form action="/Interaction/SaveReview" method="post">    
+    <div class="margin_top margin_left">
+        @Html.Partial("Menu", new MenuModel{SessionId = Model.SessionId})
+        
+        <div class="margin_bottom">
+            <label>Rating</label>
+            <div>
+                <input data-val="true" data-val-required="The Rating field is required." id="Rating" name="Rating" type="number" min="1" max="10" value="1">
+            </div>
+        </div>
+
+        <label>Review</label>
+        <div>
+            <textarea class="event_desciption" id="Content" name="Content" type="text" value=""></textarea>
+        </div>
+
+        <input data-val="true" id="SessionId" name="SessionId" type="hidden" value="@Model.SessionId">
+
+        <div class="margin_top">
+            <input type="submit" class="btn btn-primary btn-sm" value="Save review">
+        </div>
+    </div>
+</form>

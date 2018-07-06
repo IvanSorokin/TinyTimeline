@@ -11,5 +11,7 @@ namespace Domain.Objects
         public TimelineEvent[] Events { get; set; }
 
         public string Name { get; set; }
+        
+        public Review[] Reviews { get; set; }
     }
 }

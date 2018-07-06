@@ -8,32 +8,31 @@ namespace DataAccess.Concrete.Mappers
     public class SessionMapper : ITwoWayMapper<SessionDocument, Session>
     {
         private readonly ITwoWayMapper<TimelineEventDocument, TimelineEvent> eventMapper;
+        private readonly ITwoWayMapper<ReviewDocument, Review> reviewMapper;
 
-        public SessionMapper(ITwoWayMapper<TimelineEventDocument, TimelineEvent> eventMapper)
+        public SessionMapper(ITwoWayMapper<TimelineEventDocument, TimelineEvent> eventMapper,
+                             ITwoWayMapper<ReviewDocument, Review> reviewMapper)
         {
             this.eventMapper = eventMapper;
+            this.reviewMapper = reviewMapper;
         }
 
-        public SessionDocument Map(Session obj)
+        public SessionDocument Map(Session obj) => new SessionDocument
         {
-            return new SessionDocument
-                   {
-                       Id = obj.Id,
-                       CreateDate = obj.CreateDate,
-                       Events = obj.Events.Select(eventMapper.Map).ToArray(),
-                       Name = obj.Name
-                   };
-        }
-        
-        public Session Map(SessionDocument obj)
+            Id = obj.Id,
+            CreateDate = obj.CreateDate,
+            Events = obj.Events.Select(eventMapper.Map).ToArray(),
+            Name = obj.Name,
+            Reviews = obj.Reviews.Select(reviewMapper.Map).ToArray()
+        };
+
+        public Session Map(SessionDocument obj) => new Session
         {
-            return new Session
-                   {
-                       Id = obj.Id,
-                       CreateDate = obj.CreateDate,
-                       Events = obj.Events.Select(eventMapper.Map).ToArray(),
-                       Name = obj.Name
-                   };
-        }
+            Id = obj.Id,
+            CreateDate = obj.CreateDate,
+            Events = obj.Events.Select(eventMapper.Map).ToArray(),
+            Name = obj.Name,
+            Reviews = obj.Reviews.Select(reviewMapper.Map).ToArray()
+        };
     }
 }

@@ -13,7 +13,9 @@ namespace DataAccess.Documents
         [BsonDateTimeOptions(DateOnly = true)] 
         public DateTime CreateDate { get; set; }
 
-        public TimelineEventDocument[] Events { get; set; }       
+        public TimelineEventDocument[] Events { get; set; }      
+        
+        public ReviewDocument[] Reviews { get; set; }
         
         public string Name { get; set; }
     }

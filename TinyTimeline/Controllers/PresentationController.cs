@@ -29,6 +29,22 @@ namespace TinyTimeline.Controllers
             return View(new SessionsModel {Sessions = sessions});
         }
 
+        public IActionResult Reviews(Guid sessionId)
+        {
+            return View(new ReviewsModel
+                        {
+                            Reviews = sessionsRepository
+                                     .Get(sessionId).Reviews
+                                     .OrderByDescending(x => x.Rating)
+                                     .Select(x => new ReviewModel
+                                                  {
+                                                      Content = x.Content,
+                                                      Rating = x.Rating
+                                                  }),
+                            SessionId = sessionId
+                        });
+        }
+
         public IActionResult Session(Guid sessionId, EventFilterType filterType = EventFilterType.All)
         {
             var session = sessionsRepository.Get(sessionId);
@@ -53,13 +69,14 @@ namespace TinyTimeline.Controllers
                 default:
                     return NotFound();
             }
+
             return View(new SessionModel
                         {
                             Events = events,
                             SessionId = sessionId,
                             EventFilterType = filterType,
                             Name = session.Name,
-                            CreateDate = session.CreateDate,
+                            CreateDate = session.CreateDate
                         });
         }
     }

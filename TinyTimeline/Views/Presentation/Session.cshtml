@@ -1,5 +1,6 @@
 ﻿@using TinyTimeline.Models
 @model SessionModel
+
 <link rel="stylesheet" href="~/css/site.css"/>
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
 
@@ -23,5 +24,6 @@
             @Html.ActionLink("Add event", "AddEvent", "Interaction", new {sessionId = Model.SessionId}, new {@class = "btn btn-primary btn-sm"})
             @Html.ActionLink("Vote", "Voting", "Interaction", new {sessionId = Model.SessionId}, new {@class = "btn btn-primary btn-sm"})
             @Html.ActionLink("Pick to discuss", "PickToBeDiscussed", "Interaction", new {sessionId = Model.SessionId}, new {@class = "btn btn-primary btn-sm"})
+            @Html.ActionLink("Reviews", "Reviews", "Presentation", new {sessionId = Model.SessionId}, new {@class = "btn btn-primary btn-sm"})
         </div>
 </div>

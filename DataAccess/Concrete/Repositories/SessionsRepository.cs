@@ -16,14 +16,17 @@ namespace DataAccess.Concrete.Repositories
         private static UpdateDefinition<SessionDocument> positiveInc;
         private static UpdateDefinition<SessionDocument> negativeInc;
         private readonly ITwoWayMapper<TimelineEventDocument, TimelineEvent> eventsMapper;
+        private readonly ITwoWayMapper<ReviewDocument, Review> reviewMapper;
 
         public SessionsRepository(IMongoCollection<SessionDocument> collection,
                                   ITwoWayMapper<SessionDocument, Session> sessionMapper,
-                                  ITwoWayMapper<TimelineEventDocument, TimelineEvent> eventsMapper)
+                                  ITwoWayMapper<TimelineEventDocument, TimelineEvent> eventsMapper,
+                                  ITwoWayMapper<ReviewDocument, Review> reviewMapper)
         {
             this.collection = collection;
             this.sessionMapper = sessionMapper;
             this.eventsMapper = eventsMapper;
+            this.reviewMapper = reviewMapper;
 
             positiveInc = Builders<SessionDocument>.Update.Inc(x => x.Events[-1].Positive, 1);
             negativeInc = Builders<SessionDocument>.Update.Inc(x => x.Events[-1].Negative, 1);
@@ -44,6 +47,12 @@ namespace DataAccess.Concrete.Repositories
         public void AddEvent(Guid sessionId, TimelineEvent doc)
         {
             var update = Builders<SessionDocument>.Update.AddToSet(x => x.Events, eventsMapper.Map(doc));
+            collection.UpdateOne(x => x.Id == sessionId, update);
+        }
+
+        public void AddReview(Guid sessionId, Review review)
+        {
+            var update = Builders<SessionDocument>.Update.AddToSet(x => x.Reviews, reviewMapper.Map(review));
             collection.UpdateOne(x => x.Id == sessionId, update);
         }
 
