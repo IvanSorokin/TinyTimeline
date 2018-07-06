@@ -17,13 +17,18 @@
             </div>
 
             <div>
-                <label>Content: </label>
-                @Html.DisplayFor(m => e.Text)
-            </div>
+                <div style="padding-bottom: 25px">
+                    <label>Content: </label>
+                    @Html.DisplayFor(m => e.Text)
+                </div>
 
-            <button class="btn btn-primary btn-sm" onclick="sendVote('@e.Id', '@Model.SessionId', true)">Like it!</button>
-            <button class="btn btn-primary btn-sm" onclick="sendVote('@e.Id', '@Model.SessionId', false)">Dislike it!</button>
-            <button class="btn btn-primary btn-sm" onclick="skip('@e.Id')">Skip it!</button>
+
+                <div class="float_right" style="margin-top: -25px; margin-right: -5px">
+                    <button class="btn btn-primary btn-sm" onclick="sendVote('@e.Id', '@Model.SessionId', true)">Like</button>
+                    <button class="btn btn-primary btn-sm" onclick="sendVote('@e.Id', '@Model.SessionId', false)">Dislike</button>
+                    <button class="btn btn-primary btn-sm" onclick="skip('@e.Id')">Skip</button>
+                </div>
+            </div>
         </div>
     }
 

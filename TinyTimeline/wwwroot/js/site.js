@@ -12,6 +12,19 @@
     checkIfDone();
 }
 
+function deleteEvent(eventId, sessionId) {
+    $.ajax({
+        type: 'DELETE',
+        url: '/Interaction/DeleteEvent',
+        data: {
+            eventId: eventId,
+            sessionId: sessionId
+        }
+    });
+    $("#" + eventId).hide();
+    checkIfDone();
+}
+
 function skip(currentId) {
     $("#" + currentId).hide();
     checkIfDone();

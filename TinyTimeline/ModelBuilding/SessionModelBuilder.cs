@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Domain.Objects;
+﻿using Domain.Objects;
 using TinyTimeline.Models;
 
 namespace TinyTimeline.ModelBuilding
@@ -19,7 +18,7 @@ namespace TinyTimeline.ModelBuilding
                    {
                        SessionId = session.Id,
                        CreateDate = session.CreateDate,
-                       Events = session.Events.Select(eventModelBuilder.Build).ToArray(),
+                       Events = eventModelBuilder.DateSortedBuild(session),
                        Conclusion = session.Conclusion,
                        Plans = session.Plans,
                        Name = session.Name

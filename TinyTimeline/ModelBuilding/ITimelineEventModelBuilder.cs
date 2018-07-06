@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Domain.Objects;
 using TinyTimeline.Models;
 
@@ -6,10 +7,10 @@ namespace TinyTimeline.ModelBuilding
 {
     public interface ITimelineEventModelBuilder
     {
-        TimelineEventModel Build(TimelineEvent timelineEvent);
-        IEnumerable<TimelineEventModel> DateSortedBuild(IEnumerable<TimelineEvent> events);
-        IEnumerable<TimelineEventModel> DateSortedPositiveBuild(IEnumerable<TimelineEvent> events);
-        IEnumerable<TimelineEventModel> DateSortedNegativeBuild(IEnumerable<TimelineEvent> events);
-        IEnumerable<TimelineEventModel> DateSortedDebatableBuild(IEnumerable<TimelineEvent> events);
+        TimelineEventModel Build(TimelineEvent t, Guid sessionId);
+        IEnumerable<TimelineEventModel> DateSortedBuild(Session session);
+        IEnumerable<TimelineEventModel> DateSortedPositiveBuild(Session session);
+        IEnumerable<TimelineEventModel> DateSortedNegativeBuild(Session session);
+        IEnumerable<TimelineEventModel> DateSortedDebatableBuild(Session session);
     }
 }

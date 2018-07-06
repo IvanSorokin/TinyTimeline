@@ -26,7 +26,7 @@ namespace TinyTimeline.Controllers
 
         public IActionResult Voting(Guid sessionId)
         {
-            var events = eventModelBuilder.DateSortedBuild(sessionsRepository.Get(sessionId).Events).ToList();
+            var events = eventModelBuilder.DateSortedBuild(sessionsRepository.Get(sessionId)).ToList();
             return View(new SessionModel
                         {
                             Events = events,
@@ -52,6 +52,13 @@ namespace TinyTimeline.Controllers
                                               Text = model.Text
                                           });
             return RedirectToAction("AddEvent", new {sessionId = model.SessionId});
+        }
+        
+        [HttpDelete]
+        public IActionResult DeleteEvent(Guid sessionId, Guid eventId)
+        {
+            sessionsRepository.RemoveEvent(sessionId, eventId);
+            return RedirectToAction("Session", "Presentation", new {sessionId = sessionId});
         }
 
         [HttpPost]
