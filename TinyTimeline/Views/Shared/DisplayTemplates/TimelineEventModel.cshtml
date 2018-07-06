@@ -1,10 +1,5 @@
 ﻿@model TinyTimeline.Models.TimelineEventModel
 
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
-<link rel="stylesheet" href="~/css/site.css"/>
-<script src="~/js/site.js" asp-append-version="true"></script>
-<script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
-
 <div class="event margin_bottom bordered_fill" id="@Model.Id">
     <label>@Html.DisplayFor(m => m.Date):</label>
     <label>+(@Model.Positive) / -(@Model.Negative)</label>
