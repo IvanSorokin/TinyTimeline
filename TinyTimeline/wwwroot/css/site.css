@@ -37,6 +37,10 @@
     float: right;
 }
 
+.negative_margin_top{
+    margin-top: -1px;
+}
+
 .float_left{
     float: left;
 }
