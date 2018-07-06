@@ -19,5 +19,7 @@ namespace TinyTimeline.Models
         [Required]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime CreateDate { get; set; }
+        
+        public EventFilterType EventFilterType { get; set; }
     }
 }

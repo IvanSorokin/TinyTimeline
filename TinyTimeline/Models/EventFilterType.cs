@@ -4,6 +4,9 @@ namespace TinyTimeline.Models
 {
     public enum EventFilterType
     {
+        [Display(Name = "All")]
+        All,
+        
         [Display(Name = "Positive")]
         Positive,
         

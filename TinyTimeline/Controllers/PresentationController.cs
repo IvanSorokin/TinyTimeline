@@ -23,47 +23,40 @@ namespace TinyTimeline.Controllers
             this.sessionModelBuilder = sessionModelBuilder;
         }
 
-        public IActionResult Session(Guid sessionId)
-        {
-            var session = sessionsRepository.Get(sessionId);
-            var events = eventModelBuilder.DateSortedBuild(session.Events);
-            return View(new SessionModel
-                        {
-                            Events = events.ToArray(),
-                            Name = session.Name,
-                            CreateDate = session.CreateDate,
-                            SessionId = sessionId
-                        });
-        }
-
         public IActionResult Sessions()
         {
             var sessions = sessionsRepository.GetSessions().Select(sessionModelBuilder.Build);
             return View(new SessionsModel {Sessions = sessions});
         }
 
-        public IActionResult FilteredSession(Guid sessionId, EventFilterType filterType)
+        public IActionResult Session(Guid sessionId, EventFilterType filterType = EventFilterType.All)
         {
+            var session = sessionsRepository.Get(sessionId);
             IEnumerable<TimelineEventModel> events;
             switch (filterType)
             {
                 case EventFilterType.Positive:
-                    events = eventModelBuilder.DateSortedPositiveBuild(sessionsRepository.Get(sessionId).Events);
+                    events = eventModelBuilder.DateSortedPositiveBuild(session.Events);
                     break;
                 case EventFilterType.Debatable:
-                    events = eventModelBuilder.DateSortedDebatableBuild(sessionsRepository.Get(sessionId).Events);
+                    events = eventModelBuilder.DateSortedDebatableBuild(session.Events);
                     break;
                 case EventFilterType.Negative:
-                    events = eventModelBuilder.DateSortedNegativeBuild(sessionsRepository.Get(sessionId).Events);
+                    events = eventModelBuilder.DateSortedNegativeBuild(session.Events);
+                    break;
+                case EventFilterType.All:
+                    events = eventModelBuilder.DateSortedBuild(session.Events);
                     break;
                 default:
                     return NotFound();
             }
-            return View(new FilteredSessionModel
+            return View(new SessionModel
                         {
                             Events = events,
                             SessionId = sessionId,
-                            EventFilterType = filterType
+                            EventFilterType = filterType,
+                            Name = session.Name,
+                            CreateDate = session.CreateDate,
                         });
         }
     }

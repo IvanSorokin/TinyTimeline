@@ -10,6 +10,10 @@
         Session: @Model.Name,
         created at @Html.DisplayFor(m => m.CreateDate)
     </div>
+    
+    <div class="margin_bottom">
+        <label>@Html.DisplayFor(z => z.EventFilterType) events</label>
+    </div>
 
     @if (Model.Events.Any())
     {
@@ -18,21 +22,14 @@
             @Html.DisplayFor(m => e)
         }
         <div>
-            <div class="margin_bottom">
-                @Html.ActionLink("Positive", "FilteredSession", new {sessionId = Model.SessionId, filterType = EventFilterType.Positive},new {@class = "btn btn-primary btn-sm"})
-                @Html.ActionLink("Negative", "FilteredSession", new {sessionId = Model.SessionId, filterType = EventFilterType.Negative},new {@class = "btn btn-primary btn-sm"})
-                @Html.ActionLink("Debatable", "FilteredSession", new {sessionId = Model.SessionId, filterType = EventFilterType.Debatable},new {@class = "btn btn-primary btn-sm"})
-            </div>
-
+            @Html.Partial("TimelineEventFilters", Model.SessionId)
             @Html.ActionLink("Add event", "AddEvent", "Interaction", new {sessionId = Model.SessionId}, new {@class = "btn btn-primary btn-sm"})
-            @if (Model.Events.Any())
-            {
-                @Html.ActionLink("Vote", "Voting", "Interaction", new {sessionId = Model.SessionId}, new {@class = "btn btn-primary btn-sm"})
-            }
+            @Html.ActionLink("Vote", "Voting", "Interaction", new {sessionId = Model.SessionId}, new {@class = "btn btn-primary btn-sm"})
         </div>
     }
     else
     {
+        @Html.Partial("TimelineEventFilters", Model.SessionId)
         <div>
             <label>@Html.ActionLink("Add event", "AddEvent", "Interaction", new {sessionId = Model.SessionId}, new {@class = "btn btn-primary btn-sm"})</label>
         </div>
