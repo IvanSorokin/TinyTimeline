@@ -6,10 +6,12 @@
                 isPositive: positive,
                 eventId: eventId,
                 sessionId: sessionId
+            },
+            success: function () {
+                $("#" + eventId).hide();
+                checkIfDone();
             }
         });
-    $("#" + eventId).hide();
-    checkIfDone();
 }
 
 function toBeDiscussed(eventId, sessionId) {
@@ -19,10 +21,27 @@ function toBeDiscussed(eventId, sessionId) {
         data: {
             eventId: eventId,
             sessionId: sessionId
+        },
+        success: function () {
+            $("#" + eventId).hide();
+            checkIfDone();
         }
     });
-    $("#" + eventId).hide();
-    checkIfDone();
+}
+
+function saveConclusion(eventId, sessionId) {
+    $.ajax({
+        type: 'POST',
+        url: '/Interaction/SaveConclusion',
+        data: {
+            eventId: eventId,
+            sessionId: sessionId,
+            conclusion: $("#conclusion" + eventId).val()
+        },
+        success: function () {
+            alert("Saved")
+        }
+    });
 }
 
 function deleteEvent(eventId, sessionId) {
@@ -32,10 +51,12 @@ function deleteEvent(eventId, sessionId) {
         data: {
             eventId: eventId,
             sessionId: sessionId
+        },
+        success: function () {
+            $("#" + eventId).hide();
+            checkIfDone();
         }
     });
-    $("#" + eventId).hide();
-    checkIfDone();
 }
 
 function skip(currentId) {

@@ -63,6 +63,13 @@ namespace TinyTimeline.Controllers
             sessionsRepository.ToBeDiscussed(sessionId, eventId);
             return Json("");
         }
+        
+        [HttpPost]
+        public IActionResult SaveConclusion(Guid sessionId, Guid eventId, string conclusion)
+        {
+            sessionsRepository.SetConclusion(sessionId, eventId, conclusion);
+            return Json("");
+        }
 
 
         [HttpPost]

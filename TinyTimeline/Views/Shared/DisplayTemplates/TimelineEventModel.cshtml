@@ -1,6 +1,6 @@
 ﻿@model TinyTimeline.Models.TimelineEventModel
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-<link rel="stylesheet" href="~/css/site.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
+<link rel="stylesheet" href="~/css/site.css"/>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
 
@@ -15,8 +15,26 @@
     }
     <div>
         @Model.Text
-        <div class="float_right">
-            <a style="cursor:pointer" onclick="deleteEvent('@Model.Id', '@Model.SessionId')">Delete</a>
-        </div>
+        @if (Model.ToBeDiscussed > 0)
+        {
+            <div >
+                <textarea class="event_desciption" id=@($"conclusion{Model.Id}")  name="Text" type="text" value="" placeholder="Write your conclusion for event">@Model.Conclusion</textarea>
+            </div>
+        }
+
+        @if (Model.ToBeDiscussed > 0)
+        {
+            <div class="float_right" style="margin-top: -20px">
+                <a style="cursor: pointer" onclick="saveConclusion('@Model.Id', '@Model.SessionId')">Save</a>
+                <a style="cursor: pointer" onclick="deleteEvent('@Model.Id', '@Model.SessionId')">Delete</a>
+            </div>
+        }
+        else
+        {
+            <div class="float_right">
+                <a style="cursor: pointer" onclick="deleteEvent('@Model.Id', '@Model.SessionId')">Delete</a>
+            </div>
+        }
+
     </div>
 </div>
