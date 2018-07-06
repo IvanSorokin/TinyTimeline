@@ -58,7 +58,9 @@ namespace TinyTimeline
                                            SupportedUICultures = supportedCultures
                                        });
             app.UseStaticFiles();
+            app.UseHttpsRedirection();
             app.UseDeveloperExceptionPage();
+            app.UseHttpsRedirection();
             app.UseMvc(routes =>
                        {
                            routes.MapRoute(

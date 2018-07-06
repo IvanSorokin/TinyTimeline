@@ -13,4 +13,5 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=DA21EE3D_002D9682_002D4C09_002D9E4A_002D6F4AC15A7B81_002Fd_003ADocuments_002Ff_003ASessionDocument_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=DA21EE3D_002D9682_002D4C09_002D9E4A_002D6F4AC15A7B81_002Fd_003AInterfaces_002Fd_003AMappers_002Ff_003AITwoWayMapper_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=DA21EE3D_002D9682_002D4C09_002D9E4A_002D6F4AC15A7B81_002Fd_003AInterfaces_002Fd_003ARepositories_002Ff_003AITimelineEventsRepository_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
-	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=DA21EE3D_002D9682_002D4C09_002D9E4A_002D6F4AC15A7B81_002Ff_003ADataAccessRegistry_002Ecs/@EntryIndexedValue">ForceIncluded</s:String></wpf:ResourceDictionary>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=DA21EE3D_002D9682_002D4C09_002D9E4A_002D6F4AC15A7B81_002Ff_003ADataAccessRegistry_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	</wpf:ResourceDictionary>
