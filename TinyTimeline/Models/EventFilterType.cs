@@ -14,6 +14,9 @@ namespace TinyTimeline.Models
         Negative,
         
         [Display(Name = "Debatable")]
-        Debatable
+        Debatable,
+        
+        [Display(Name = "Discussable")]
+        Discussable
     }
 }

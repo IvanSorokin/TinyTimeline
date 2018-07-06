@@ -26,7 +26,20 @@ namespace TinyTimeline.Controllers
 
         public IActionResult Voting(Guid sessionId)
         {
-            var events = eventModelBuilder.DateSortedBuild(sessionsRepository.Get(sessionId)).ToList();
+            var events = eventModelBuilder.DateSortedBuild(sessionsRepository.Get(sessionId).Events, sessionId).ToList();
+            if (!events.Any())
+                return RedirectToAction("AddEvent", "Interaction", new {sessionId = sessionId});
+            
+            return View(new SessionModel
+                        {
+                            Events = events,
+                            SessionId = sessionId
+                        });
+        }
+        
+        public IActionResult PickToBeDiscussed(Guid sessionId)
+        {
+            var events = eventModelBuilder.DateSortedBuild(sessionsRepository.Get(sessionId).Events, sessionId).ToList();
             if (!events.Any())
                 return RedirectToAction("AddEvent", "Interaction", new {sessionId = sessionId});
             
@@ -43,6 +56,14 @@ namespace TinyTimeline.Controllers
             sessionsRepository.Vote(vote.SessionId, vote.EventId, vote.IsPositive);
             return Json("");
         }
+        
+        [HttpPost]
+        public IActionResult ToBeDiscussed(Guid sessionId, Guid eventId)
+        {
+            sessionsRepository.ToBeDiscussed(sessionId, eventId);
+            return Json("");
+        }
+
 
         [HttpPost]
         public IActionResult SaveEvent(TimelineEventModel model)

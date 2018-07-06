@@ -13,5 +13,7 @@ namespace DataAccess.Interfaces.Repositories
         Session Get(Guid sessionId);
         IEnumerable<Session> GetSessions();
         void Vote(Guid sessionId, Guid eventId, bool isPositive);
+        void ToBeDiscussed(Guid sessionId, Guid eventId);
+        void SetConclusion(Guid sessionId, Guid eventId, string conclusion);
     }
 }

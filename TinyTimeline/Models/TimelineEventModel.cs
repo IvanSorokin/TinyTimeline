@@ -19,5 +19,9 @@ namespace TinyTimeline.Models
         public Guid Id { get; set; }
         
         public Guid SessionId { get; set; }
+        
+        public string Conclusion { get; set; }
+        
+        public int ToBeDiscussed { get; set; }
     }
 }

@@ -12,6 +12,19 @@
     checkIfDone();
 }
 
+function toBeDiscussed(eventId, sessionId) {
+    $.ajax({
+        type: 'POST',
+        url: '/Interaction/ToBeDiscussed',
+        data: {
+            eventId: eventId,
+            sessionId: sessionId
+        }
+    });
+    $("#" + eventId).hide();
+    checkIfDone();
+}
+
 function deleteEvent(eventId, sessionId) {
     $.ajax({
         type: 'DELETE',

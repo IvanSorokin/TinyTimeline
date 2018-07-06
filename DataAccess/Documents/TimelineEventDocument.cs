@@ -16,5 +16,7 @@ namespace DataAccess.Documents
         public string Text { get; set; }
         public int Positive { get; set; }
         public int Negative { get; set; }
+        public int ToBeDiscussed { get; set; }
+        public string Conclusion { get; set; }
     }
 }

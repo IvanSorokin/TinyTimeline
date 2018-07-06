@@ -68,5 +68,17 @@ namespace DataAccess.Concrete.Repositories
             var filter = Builders<SessionDocument>.Filter.Where(x => x.Id == sessionId && x.Events.Any(i => i.Id == eventId));
             collection.UpdateOne(filter, isPositive ? positiveInc : negativeInc);
         }
+        
+        public void ToBeDiscussed(Guid sessionId, Guid eventId)
+        {
+            var filter = Builders<SessionDocument>.Filter.Where(x => x.Id == sessionId && x.Events.Any(i => i.Id == eventId));
+            collection.UpdateOne(filter, Builders<SessionDocument>.Update.Inc(x => x.Events[-1].ToBeDiscussed, 1));
+        }
+
+        public void SetConclusion(Guid sessionId, Guid eventId, string conclusion)
+        {
+            var filter = Builders<SessionDocument>.Filter.Where(x => x.Id == sessionId && x.Events.Any(i => i.Id == eventId));
+            collection.UpdateOne(filter, Builders<SessionDocument>.Update.Set(x => x.Events[-1].Conclusion, conclusion));
+        }
     }
 }

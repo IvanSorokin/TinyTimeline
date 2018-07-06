@@ -1,0 +1,38 @@
+﻿@using TinyTimeline.Models
+@model SessionModel
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+<link rel="stylesheet" href="~/css/site.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+
+<div class="margin_top margin_left">
+    @Html.Partial("Menu", new MenuModel {SessionId = Model.SessionId})
+    @foreach (var e in Model.Events)
+    {
+        <div class="vote_item event bordered_fill" id="@e.Id">
+
+            <div>
+                <label>Date: </label>
+                @Html.DisplayFor(m => e.Date)
+                <label>+(@e.Positive) / -(@e.Negative)</label>
+            </div>
+
+            <div>
+                <div style="padding-bottom: 25px">
+                    <label>Content: </label>
+                    @Html.DisplayFor(m => e.Text)
+                </div>
+
+
+                <div class="float_right" style="margin-top: -25px; margin-right: -5px">
+                    <button class="btn btn-primary btn-sm" onclick="toBeDiscussed('@e.Id', '@Model.SessionId')">Want to discuss</button>
+                    <button class="btn btn-primary btn-sm" onclick="skip('@e.Id')">Skip</button>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div hidden id="voteEnd">
+        Done! @Html.ActionLink("Watch timeline!", "Session", "Presentation", new {sessionId = Model.SessionId})
+    </div>
+</div>

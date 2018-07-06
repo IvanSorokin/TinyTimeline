@@ -12,8 +12,6 @@ namespace TinyTimeline.Models
         
         public string Name { get; set; }
         public IEnumerable<TimelineEventModel> Events { get; set; }
-        public string Conclusion { get; set; }
-        public string Plans { get; set; }
         
         [DataType(DataType.Date)]
         [Required]

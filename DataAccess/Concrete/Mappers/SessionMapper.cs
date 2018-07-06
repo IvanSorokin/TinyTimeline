@@ -21,8 +21,6 @@ namespace DataAccess.Concrete.Mappers
                        Id = obj.Id,
                        CreateDate = obj.CreateDate,
                        Events = obj.Events.Select(eventMapper.Map).ToArray(),
-                       Conclusion = obj.Conclusion,
-                       Plans = obj.Plans,
                        Name = obj.Name
                    };
         }
@@ -34,8 +32,6 @@ namespace DataAccess.Concrete.Mappers
                        Id = obj.Id,
                        CreateDate = obj.CreateDate,
                        Events = obj.Events.Select(eventMapper.Map).ToArray(),
-                       Conclusion = obj.Conclusion,
-                       Plans = obj.Plans,
                        Name = obj.Name
                    };
         }

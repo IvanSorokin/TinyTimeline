@@ -14,8 +14,7 @@ namespace DataAccess.Documents
         public DateTime CreateDate { get; set; }
 
         public TimelineEventDocument[] Events { get; set; }       
-        public string Conclusion { get; set; }
-        public string Plans { get; set; }
+        
         public string Name { get; set; }
     }
 }

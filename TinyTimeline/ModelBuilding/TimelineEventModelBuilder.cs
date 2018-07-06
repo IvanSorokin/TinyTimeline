@@ -15,29 +15,38 @@ namespace TinyTimeline.ModelBuilding
                                                                 Positive = t.Positive,
                                                                 Negative = t.Negative,
                                                                 Id = t.Id,
+                                                                Conclusion = t.Conclusion,
+                                                                ToBeDiscussed = t.ToBeDiscussed,
                                                                 SessionId = sessionId
                                                             };
 
-        public IEnumerable<TimelineEventModel> DateSortedBuild(Session session)
+        public IEnumerable<TimelineEventModel> DateSortedBuild(IEnumerable<TimelineEvent> events, Guid sessionId)
         {
-            return session.Events
-                          .OrderBy(x => x.Date)
-                          .Select(z => Build(z, session.Id));
+            return events.OrderBy(x => x.Date)
+                          .Select(z => Build(z, sessionId));
         }
         
         public IEnumerable<TimelineEventModel> DateSortedPositiveBuild(Session session)
         {
-            return DateSortedBuild(session).Where(x => x.Positive > 0 && x.Negative == 0);
+            return DateSortedBuild(session.Events.Where(x => x.Positive > 0 && x.Negative == 0), session.Id);
         }
         
         public IEnumerable<TimelineEventModel> DateSortedNegativeBuild(Session session)
         {
-            return DateSortedBuild(session).Where(x => x.Positive == 0 && x.Negative > 0);
+            return DateSortedBuild(session.Events.Where(x => x.Positive == 0 && x.Negative > 0), session.Id);
         }
         
         public IEnumerable<TimelineEventModel> DateSortedDebatableBuild(Session session)
         {
-            return DateSortedBuild(session).Where(x => x.Positive > 0 && x.Negative > 0);
+            return DateSortedBuild(session.Events.Where(x => x.Positive > 0 && x.Negative > 0), session.Id);
+        }
+        
+        public IEnumerable<TimelineEventModel> ToBeDiscussedBuild(Session session)
+        {
+            return session.Events
+                          .Where(x => x.ToBeDiscussed > 0)
+                          .OrderByDescending(x => x.ToBeDiscussed)
+                          .Select(z => Build(z, session.Id));
         }
     }
 }

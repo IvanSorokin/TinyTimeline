@@ -14,7 +14,9 @@ namespace DataAccess.Concrete.Mappers
                        Text = obj.Text,
                        Date = obj.Date,
                        Positive = obj.Positive,
-                       Negative = obj.Negative
+                       Negative = obj.Negative,
+                       ToBeDiscussed = obj.ToBeDiscussed,
+                       Conclusion = obj.Conclusion
                    };
         }
 
@@ -26,7 +28,9 @@ namespace DataAccess.Concrete.Mappers
                        Text = obj.Text,
                        Date = obj.Date,
                        Positive = obj.Positive,
-                       Negative = obj.Negative
+                       Negative = obj.Negative,
+                       ToBeDiscussed = obj.ToBeDiscussed,
+                       Conclusion = obj.Conclusion
                    };
         }
     }
