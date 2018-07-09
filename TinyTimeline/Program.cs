@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
 namespace TinyTimeline
@@ -13,7 +10,7 @@ namespace TinyTimeline
             BuildWebHost(args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args)
+        private static IWebHost BuildWebHost(string[] args)
         {
             return WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
