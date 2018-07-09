@@ -1,5 +1,5 @@
 ﻿@using TinyTimeline.Models
-@model ReviewModel
+@model SessionInfoModel
 
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
 <link rel="stylesheet" href="~/css/site.css"/>
@@ -7,6 +7,7 @@
 <form action="/Interaction/SaveReview" method="post">    
     <div class="margin_top margin_left">
         @Html.Partial("Menu", new MenuModel{SessionId = Model.SessionId})
+        @Html.DisplayFor(m => m)
         
         <div class="margin_bottom">
             <label>Rating</label>

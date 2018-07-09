@@ -7,7 +7,9 @@
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
 
 <div class="margin_top margin_left">
-    @Html.Partial("Menu", new MenuModel {SessionId = Model.SessionId})
+    @Html.Partial("Menu", new MenuModel {SessionId = Model.SessionInfo.SessionId})
+    @Html.DisplayFor(m => m.SessionInfo)
+    
     @foreach (var e in Model.Events)
     {
         <div class="vote_item event bordered_fill" id="@e.Id">
@@ -25,8 +27,8 @@
 
 
                 <div class="float_right" style="margin-top: -25px; margin-right: -5px">
-                    <button class="btn btn-primary btn-sm" onclick="sendVote('@e.Id', '@Model.SessionId', true)">Like</button>
-                    <button class="btn btn-primary btn-sm" onclick="sendVote('@e.Id', '@Model.SessionId', false)">Dislike</button>
+                    <button class="btn btn-primary btn-sm" onclick="sendVote('@e.Id', '@Model.SessionInfo.SessionId', true)">Like</button>
+                    <button class="btn btn-primary btn-sm" onclick="sendVote('@e.Id', '@Model.SessionInfo.SessionId', false)">Dislike</button>
                     <button class="btn btn-primary btn-sm" onclick="skip('@e.Id')">Skip</button>
                 </div>
             </div>
@@ -34,6 +36,6 @@
     }
 
     <div hidden id="voteEnd">
-        Done! @Html.ActionLink("Watch timeline!", "Session", "Presentation", new {sessionId = Model.SessionId})
+        Done! @Html.ActionLink("Watch timeline!", "Session", "Presentation", new {sessionId = Model.SessionInfo.SessionId})
     </div>
 </div>

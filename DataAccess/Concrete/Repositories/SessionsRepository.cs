@@ -17,6 +17,7 @@ namespace DataAccess.Concrete.Repositories
         private static UpdateDefinition<SessionDocument> negativeInc;
         private readonly ITwoWayMapper<TimelineEventDocument, TimelineEvent> eventsMapper;
         private readonly ITwoWayMapper<ReviewDocument, Review> reviewMapper;
+        private static ProjectionDefinition<SessionDocument> sessionInfoFields;
 
         public SessionsRepository(IMongoCollection<SessionDocument> collection,
                                   ITwoWayMapper<SessionDocument, Session> sessionMapper,
@@ -30,6 +31,9 @@ namespace DataAccess.Concrete.Repositories
 
             positiveInc = Builders<SessionDocument>.Update.Inc(x => x.Events[-1].Positive, 1);
             negativeInc = Builders<SessionDocument>.Update.Inc(x => x.Events[-1].Negative, 1);
+            sessionInfoFields = Builders<SessionDocument>.Projection.Include(x => x.CreateDate)
+                                                                    .Include(x => x.Name)
+                                                                    .Include(x => x.Id);
         }
 
         public void Save(Session session)
@@ -94,6 +98,17 @@ namespace DataAccess.Concrete.Repositories
         {
             var filter = Builders<SessionDocument>.Filter.Where(x => x.Id == sessionId && x.Events.Any(i => i.Id == eventId));
             collection.UpdateOne(filter, Builders<SessionDocument>.Update.Set(x => x.Events[-1].Conclusion, conclusion));
+        }
+
+        public SessionInfo GetSessionInfo(Guid sessionId)
+        {
+            var doc = collection.Find(x => x.Id == sessionId).Project<SessionDocument>(sessionInfoFields).Single();
+            return new SessionInfo
+                   {
+                       Name = doc.Name,
+                       CreateDate = doc.CreateDate,
+                       Id = doc.Id
+                   };
         }
     }
 }

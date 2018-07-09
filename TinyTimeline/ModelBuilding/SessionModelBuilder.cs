@@ -16,10 +16,8 @@ namespace TinyTimeline.ModelBuilding
         {
             return new SessionModel
                    {
-                       SessionId = session.Id,
-                       CreateDate = session.CreateDate,
                        Events = eventModelBuilder.DateSortedBuild(session.Events, session.Id),
-                       Name = session.Name
+                       SessionInfo = new SessionInfoModel {SessionId = session.Id, SessionCreateDate = session.CreateDate, SessionName = session.Name}
                    };
         }
     }

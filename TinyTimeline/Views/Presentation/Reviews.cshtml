@@ -7,11 +7,12 @@
 <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
 
 <div class="margin_left margin_top">
-    @Html.Partial("Menu", new MenuModel {SessionId = Model.SessionId})
+    @Html.Partial("Menu", new MenuModel {SessionId = Model.SessionInfo.SessionId})
+    @Html.DisplayFor(m => m.SessionInfo)
     @foreach (var review in Model.Reviews)
     {
         @Html.DisplayFor(m => review)
     }
 
-    @Html.ActionLink("Add review", "AddReview", "Interaction", new {sessionId = Model.SessionId}, new {@class = "btn btn-primary btn-sm"})
+    @Html.ActionLink("Add review", "AddReview", "Interaction", new {sessionId = Model.SessionInfo.SessionId}, new {@class = "btn btn-primary btn-sm"})
 </div>

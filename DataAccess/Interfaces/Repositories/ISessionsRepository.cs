@@ -17,5 +17,6 @@ namespace DataAccess.Interfaces.Repositories
         void Vote(Guid sessionId, Guid eventId, bool isPositive);
         void ToBeDiscussed(Guid sessionId, Guid eventId);
         void SetConclusion(Guid sessionId, Guid eventId, string conclusion);
+        SessionInfo GetSessionInfo(Guid sessionId);
     }
 }

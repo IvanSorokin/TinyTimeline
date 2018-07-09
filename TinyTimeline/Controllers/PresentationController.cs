@@ -31,10 +31,10 @@ namespace TinyTimeline.Controllers
 
         public IActionResult Reviews(Guid sessionId)
         {
+            var session = sessionsRepository.Get(sessionId);
             return View(new ReviewsModel
                         {
-                            Reviews = sessionsRepository
-                                     .Get(sessionId).Reviews
+                            Reviews = session.Reviews
                                      .OrderByDescending(x => x.Rating)
                                      .Select(x => new ReviewModel
                                                   {
@@ -43,7 +43,12 @@ namespace TinyTimeline.Controllers
                                                       Id = x.Id,
                                                       SessionId = sessionId
                                                   }),
-                            SessionId = sessionId
+                            SessionInfo = new SessionInfoModel
+                                          {
+                                              SessionId = session.Id, 
+                                              SessionCreateDate = session.CreateDate, 
+                                              SessionName = session.Name
+                                          }
                         });
         }
 
@@ -75,10 +80,13 @@ namespace TinyTimeline.Controllers
             return View(new SessionModel
                         {
                             Events = events,
-                            SessionId = sessionId,
                             EventFilterType = filterType,
-                            Name = session.Name,
-                            CreateDate = session.CreateDate
+                            SessionInfo = new SessionInfoModel
+                                          {
+                                              SessionId = session.Id, 
+                                              SessionCreateDate = session.CreateDate, 
+                                              SessionName = session.Name
+                                          }
                         });
         }
     }

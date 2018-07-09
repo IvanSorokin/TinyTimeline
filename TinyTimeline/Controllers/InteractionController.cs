@@ -20,32 +20,57 @@ namespace TinyTimeline.Controllers
             this.sessionsRepository = sessionsRepository;
         }
 
-        public IActionResult AddEvent(Guid sessionId) => View(new TimelineEventModel
-                                                              {
-                                                                  Date = DateTime.Today.AddDays(-30),
-                                                                  SessionId = sessionId
-                                                              });
+        public IActionResult AddEvent(Guid sessionId)
+        {
+            var sessionInfo = sessionsRepository.GetSessionInfo(sessionId);
+            return View(new SessionInfoModel
+                        {
+                            SessionId = sessionId,
+                            SessionName = sessionInfo.Name,
+                            SessionCreateDate = sessionInfo.CreateDate
+                        });
+        }
 
-        public IActionResult AddSession() => View(new SessionModel());
+        public IActionResult AddSession() => View();
 
         public IActionResult Voting(Guid sessionId)
         {
-            var events = eventModelBuilder.DateSortedBuild(sessionsRepository.Get(sessionId).Events, sessionId)
+            var session = sessionsRepository.Get(sessionId);
+            var events = eventModelBuilder.DateSortedBuild(session.Events, sessionId)
                                           .ToList();
             if (!events.Any())
                 return RedirectToAction("AddEvent", "Interaction", new {sessionId});
 
-            return View(new SessionModel {Events = events, SessionId = sessionId});
+            return View(new SessionModel
+                        {
+                            Events = events,
+                            SessionInfo = new SessionInfoModel
+                                          {
+                                              SessionId = session.Id,
+                                              SessionCreateDate = session.CreateDate,
+                                              SessionName = session.Name
+                                          }
+                        });
         }
 
         public IActionResult PickToBeDiscussed(Guid sessionId)
         {
-            var events = eventModelBuilder.DateSortedBuild(sessionsRepository.Get(sessionId).Events, sessionId)
+            var session = sessionsRepository.Get(sessionId);
+            var events = eventModelBuilder.DateSortedBuild(session.Events, sessionId)
                                           .ToList();
             if (!events.Any())
                 return RedirectToAction("AddEvent", "Interaction", new {sessionId});
 
-            return View(new SessionModel {Events = events, SessionId = sessionId});
+            return View(new SessionModel
+                        {
+                            Events = events,
+                            SessionInfo = new SessionInfoModel
+                                          {
+                                              SessionId = session.Id,
+                                              SessionCreateDate = session.CreateDate,
+                                              SessionName = session.Name
+                                          }
+                        });
         }
 
         [HttpPost]
@@ -69,7 +94,6 @@ namespace TinyTimeline.Controllers
             return Json("");
         }
 
-
         [HttpPost]
         public IActionResult SaveEvent(TimelineEventModel model)
         {
@@ -91,13 +115,13 @@ namespace TinyTimeline.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveSession(SessionModel model)
+        public IActionResult SaveSession(string sessionName)
         {
             sessionsRepository.Save(new Session
                                     {
                                         CreateDate = DateTime.Today,
                                         Id = Guid.NewGuid(),
-                                        Name = model.Name,
+                                        Name = sessionName,
                                         Events = new TimelineEvent[0],
                                         Reviews = new Review[0]
                                     });
@@ -123,7 +147,16 @@ namespace TinyTimeline.Controllers
             return RedirectToAction("Reviews", "Presentation", new {sessionId = model.SessionId});
         }
 
-        public IActionResult AddReview(Guid sessionId) => View(new ReviewModel {SessionId = sessionId});
+        public IActionResult AddReview(Guid sessionId)
+        {
+            var sessionInfo = sessionsRepository.GetSessionInfo(sessionId);
+            return View(new SessionInfoModel
+                        {
+                            SessionId = sessionId,
+                            SessionName = sessionInfo.Name,
+                            SessionCreateDate = sessionInfo.CreateDate
+                        });
+        }
 
         [HttpDelete]
         public IActionResult DeleteReview(Guid sessionId, Guid reviewId)

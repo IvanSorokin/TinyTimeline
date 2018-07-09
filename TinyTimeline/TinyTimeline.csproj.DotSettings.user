@@ -1,7 +1,9 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/CodeInspection/WebPathMapping/IgnoredPaths/=WWWROOT_005CINTERACTION_005CSAVEEVENT/@EntryIndexedValue">wwwroot\Interaction\SaveEvent</s:String>
 	<s:String x:Key="/Default/CodeInspection/WebPathMapping/IgnoredPaths/=WWWROOT_005CINTERACTION_005CSAVEREVIEW/@EntryIndexedValue">wwwroot\Interaction\SaveReview</s:String>
+	<s:String x:Key="/Default/CodeInspection/WebPathMapping/IgnoredPaths/=WWWROOT_005CINTERACTION_005CSAVESESSION/@EntryIndexedValue">wwwroot\Interaction\SaveSession</s:String>
 	<s:String x:Key="/Default/CodeInspection/WebPathMapping/IgnoredPaths/=WWWROOT_005CSAVEEVENT/@EntryIndexedValue">wwwroot\SaveEvent</s:String>
 	<s:String x:Key="/Default/CodeInspection/WebPathMapping/PathsInCorrectCasing/=WWWROOT_005CINTERACTION_005CSAVEEVENT/@EntryIndexedValue">wwwroot\Interaction\SaveEvent</s:String>
 	<s:String x:Key="/Default/CodeInspection/WebPathMapping/PathsInCorrectCasing/=WWWROOT_005CINTERACTION_005CSAVEREVIEW/@EntryIndexedValue">wwwroot\Interaction\SaveReview</s:String>
+	<s:String x:Key="/Default/CodeInspection/WebPathMapping/PathsInCorrectCasing/=WWWROOT_005CINTERACTION_005CSAVESESSION/@EntryIndexedValue">wwwroot\Interaction\SaveSession</s:String>
 	<s:String x:Key="/Default/CodeInspection/WebPathMapping/PathsInCorrectCasing/=WWWROOT_005CSAVEEVENT/@EntryIndexedValue">wwwroot\SaveEvent</s:String></wpf:ResourceDictionary>

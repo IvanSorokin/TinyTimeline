@@ -10,8 +10,8 @@
         foreach (var session in Model.Sessions)
         {
             <div class="margin_bottom bordered_fill session">
-                @Html.ActionLink($"{session.Name}", "Session", "Presentation", new {sessionId = session.SessionId}) at @Html.DisplayFor(m => session.CreateDate)
-                @Html.ActionLink("Delete", "DeleteSession", "Interaction", new {sessionId = session.SessionId}, new {@class = "btn btn-danger btn-xs float_right negative_margin_top"})
+                @Html.ActionLink($"{session.SessionInfo.SessionName}", "Session", "Presentation", new {sessionId = session.SessionInfo.SessionId}) at @Html.DisplayFor(m => session.SessionInfo.SessionCreateDate)
+                @Html.ActionLink("Delete", "DeleteSession", "Interaction", new {sessionId = session.SessionInfo.SessionId}, new {@class = "btn btn-danger btn-xs float_right negative_margin_top"})
             </div>
         }
     }
