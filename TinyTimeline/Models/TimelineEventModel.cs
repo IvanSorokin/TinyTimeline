@@ -23,5 +23,7 @@ namespace TinyTimeline.Models
         public string Conclusion { get; set; }
         
         public int ToBeDiscussed { get; set; }
+        
+        public bool AllowModify { get; set; }
     }
 }

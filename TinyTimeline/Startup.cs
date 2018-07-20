@@ -30,14 +30,14 @@ namespace TinyTimeline
             services.AddAuthorization(options =>
                                       {
                                           options.AddPolicy(PolicyNames.OnlyAdmin,
-                                                            p =>
+                                                            policy =>
                                                             {
-                                                                p.Requirements.Add(new UserRoleRequirement(new[] {UserRole.Administrator}));
+                                                                policy.Requirements.Add(new UserRoleRequirement(new[] {UserRole.Administrator}));
                                                             });
                                           options.AddPolicy(PolicyNames.OnlyAuthUser,
-                                                            p =>
+                                                            policy =>
                                                             {
-                                                                p.Requirements.Add(new UserRoleRequirement(new[]
+                                                                policy.Requirements.Add(new UserRoleRequirement(new[]
                                                                                                            {
                                                                                                                UserRole.Administrator,
                                                                                                                UserRole.Participant

@@ -12,11 +12,11 @@ namespace TinyTimeline.ModelBuilding
             this.eventModelBuilder = eventModelBuilder;
         }
 
-        public SessionModel Build(Session session)
+        public SessionModel Build(Session session, bool allowModify)
         {
             return new SessionModel
                    {
-                       Events = eventModelBuilder.DateSortedBuild(session.Events, session.Id),
+                       Events = eventModelBuilder.DateSortedBuild(session.Events, session.Id, allowModify),
                        SessionInfo = new SessionInfoModel {SessionId = session.Id, SessionCreateDate = session.CreateDate, SessionName = session.Name}
                    };
         }

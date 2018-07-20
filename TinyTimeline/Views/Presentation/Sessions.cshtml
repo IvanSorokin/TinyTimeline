@@ -1,7 +1,7 @@
 ﻿@model TinyTimeline.Models.SessionsModel
 
-<link rel="stylesheet" href="~/css/site.css" />
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="~/css/site.css"/>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
 
 <div class="margin_left margin_top">
     @if (Model.Sessions.Any())
@@ -11,7 +11,11 @@
         {
             <div class="margin_bottom bordered_fill session">
                 @Html.ActionLink($"{session.SessionInfo.SessionName}", "Session", "Presentation", new {sessionId = session.SessionInfo.SessionId}) at @Html.DisplayFor(m => session.SessionInfo.SessionCreateDate)
-                @Html.ActionLink("Delete", "DeleteSession", "Interaction", new {sessionId = session.SessionInfo.SessionId}, new {@class = "btn btn-danger btn-xs float_right negative_margin_top"})
+
+                @if (Model.AllowModify)
+                {
+                    @Html.ActionLink("Delete", "DeleteSession", "Interaction", new {sessionId = session.SessionInfo.SessionId}, new {@class = "btn btn-danger btn-xs float_right negative_margin_top"})
+                }
             </div>
         }
     }
@@ -21,7 +25,10 @@
             <label>Oops! No sessions. Create one!</label>
         </div>
     }
-    @Html.ActionLink("Create session", "AddSession", "Interaction", new {}, new {@class = "btn btn-primary btn-sm"})
+    
+    @if (Model.AllowModify)
+    {
+        @Html.ActionLink("Create session", "AddSession", "Interaction", new {}, new {@class = "btn btn-primary btn-sm"})
+    }
     @Html.ActionLink("Reload AuthToken", "SetToken", "Tokens", new {}, new {@class = "btn btn-primary btn-sm"})
 </div>
-

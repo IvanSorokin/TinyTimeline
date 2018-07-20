@@ -7,11 +7,10 @@ namespace TinyTimeline.ModelBuilding
 {
     public interface ITimelineEventModelBuilder
     {
-        TimelineEventModel Build(TimelineEvent t, Guid sessionId);
-        IEnumerable<TimelineEventModel> DateSortedBuild(IEnumerable<TimelineEvent> events, Guid sessionId);
-        IEnumerable<TimelineEventModel> DateSortedPositiveBuild(Session session);
-        IEnumerable<TimelineEventModel> DateSortedNegativeBuild(Session session);
-        IEnumerable<TimelineEventModel> DateSortedDebatableBuild(Session session);
-        IEnumerable<TimelineEventModel> ToBeDiscussedBuild(Session session);
+        IEnumerable<TimelineEventModel> DateSortedBuild(IEnumerable<TimelineEvent> events, Guid sessionId, bool allowModify);
+        IEnumerable<TimelineEventModel> DateSortedPositiveBuild(Session session, bool allowModify);
+        IEnumerable<TimelineEventModel> DateSortedNegativeBuild(Session session, bool allowModify);
+        IEnumerable<TimelineEventModel> DateSortedDebatableBuild(Session session, bool allowModify);
+        IEnumerable<TimelineEventModel> ToBeDiscussedBuild(Session session, bool allowModify);
     }
 }

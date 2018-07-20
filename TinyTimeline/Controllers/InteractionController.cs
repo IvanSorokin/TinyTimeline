@@ -4,6 +4,7 @@ using DataAccess.Interfaces.Repositories;
 using Domain.Objects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TinyTimeline.Helpers;
 using TinyTimeline.ModelBuilding;
 using TinyTimeline.Models;
 using TinyTimeline.Policies;
@@ -15,12 +16,15 @@ namespace TinyTimeline.Controllers
     {
         private readonly ITimelineEventModelBuilder eventModelBuilder;
         private readonly ISessionsRepository sessionsRepository;
+        private readonly IAuthTokenHelper authTokenHelper;
 
         public InteractionController(ITimelineEventModelBuilder eventModelBuilder,
-                                     ISessionsRepository sessionsRepository)
+                                     ISessionsRepository sessionsRepository,
+                                     IAuthTokenHelper authTokenHelper)
         {
             this.eventModelBuilder = eventModelBuilder;
             this.sessionsRepository = sessionsRepository;
+            this.authTokenHelper = authTokenHelper;
         }
 
         public IActionResult AddEvent(Guid sessionId)
@@ -40,7 +44,7 @@ namespace TinyTimeline.Controllers
         public IActionResult Voting(Guid sessionId)
         {
             var session = sessionsRepository.Get(sessionId);
-            var events = eventModelBuilder.DateSortedBuild(session.Events, sessionId)
+            var events = eventModelBuilder.DateSortedBuild(session.Events, sessionId, authTokenHelper.IsAdmin())
                                           .ToList();
             if (!events.Any())
                 return RedirectToAction("AddEvent", "Interaction", new {sessionId});
@@ -60,7 +64,7 @@ namespace TinyTimeline.Controllers
         public IActionResult PickToBeDiscussed(Guid sessionId)
         {
             var session = sessionsRepository.Get(sessionId);
-            var events = eventModelBuilder.DateSortedBuild(session.Events, sessionId)
+            var events = eventModelBuilder.DateSortedBuild(session.Events, sessionId, authTokenHelper.IsAdmin())
                                           .ToList();
             if (!events.Any())
                 return RedirectToAction("AddEvent", "Interaction", new {sessionId});

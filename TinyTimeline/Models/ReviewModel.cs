@@ -8,5 +8,6 @@ namespace TinyTimeline.Models
         public int Rating { get; set; }
         public Guid SessionId { get; set; }
         public Guid Id { get; set; }
+        public bool AllowModify { get; set; }
     }
 }

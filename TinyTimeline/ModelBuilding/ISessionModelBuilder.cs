@@ -5,6 +5,6 @@ namespace TinyTimeline.ModelBuilding
 {
     public interface ISessionModelBuilder
     {
-        SessionModel Build(Session session);
+        SessionModel Build(Session session, bool allowModify);
     }
 }

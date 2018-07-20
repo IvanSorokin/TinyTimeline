@@ -13,7 +13,10 @@
             </div>
         </div>
     </div>
-    <div class="float_right" style="margin-top: -20px">
-        <a class="btn btn-danger btn-xs" style="cursor: pointer" onclick="deleteReview('@Model.Id', '@Model.SessionId')">Delete</a>
-    </div>
+    @if (Model.AllowModify)
+    {
+        <div class="float_right" style="margin-top: -20px">
+            <a class="btn btn-danger btn-xs" style="cursor: pointer" onclick="deleteReview('@Model.Id', '@Model.SessionId')">Delete</a>
+        </div>
+    }
 </div>
