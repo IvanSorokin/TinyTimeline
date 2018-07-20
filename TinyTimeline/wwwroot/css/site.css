@@ -19,6 +19,11 @@
     word-break: break-word;
 }
 
+.discussion_area{
+    width: 550px;
+    margin-bottom: 10px;
+}
+
 .session{
     width: 600px;
 }

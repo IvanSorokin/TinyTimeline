@@ -15,7 +15,7 @@
             @if (Model.ToBeDiscussed > 0)
             {
                 <div class="margin_top">
-                    <textarea class="event_desciption" id=@($"conclusion{Model.Id}")  name="Text" type="text" value="" placeholder="Write your conclusion for event">@Model.Conclusion</textarea>
+                    <textarea class="discussion_area" rows="5"  id=@($"conclusion{Model.Id}")  name="Text" type="text" value="" placeholder="Write your conclusion for event">@Model.Conclusion</textarea>
                 </div>
             }
         </div>
