@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Globalization;
 using DataAccess;
+using Domain.Objects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StructureMap;
+using TinyTimeline.Policies;
 
 namespace TinyTimeline
 {
@@ -22,7 +25,29 @@ namespace TinyTimeline
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc()
-                .AddControllersAsServices();
+                    .AddControllersAsServices();
+
+            services.AddAuthorization(options =>
+                                      {
+                                          options.AddPolicy(PolicyNames.OnlyAdmin,
+                                                            p =>
+                                                            {
+                                                                p.Requirements.Add(new UserRoleRequirement(new[] {UserRole.Administrator}));
+                                                            });
+                                          options.AddPolicy(PolicyNames.OnlyAuthUser,
+                                                            p =>
+                                                            {
+                                                                p.Requirements.Add(new UserRoleRequirement(new[]
+                                                                                                           {
+                                                                                                               UserRole.Administrator,
+                                                                                                               UserRole.Participant
+                                                                                                           }));
+                                                            });
+                                      });
+            
+
+            services.AddSingleton<IAuthorizationHandler, UserRoleRequirementHandler>()
+                    .AddHttpContextAccessor();
 
             return ConfigureIoC(services);
         }
@@ -64,8 +89,8 @@ namespace TinyTimeline
             app.UseMvc(routes =>
                        {
                            routes.MapRoute(
-                               "default",
-                               "{controller=Home}/{action=Index}/{id?}");
+                                           "default",
+                                           "{controller=Home}/{action=Index}/{id?}");
                        });
         }
     }

@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Interfaces.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TinyTimeline.ModelBuilding;
 using TinyTimeline.Models;
+using TinyTimeline.Policies;
 
 namespace TinyTimeline.Controllers
 {
+    [Authorize(Policy = PolicyNames.OnlyAuthUser)]
     public class PresentationController : Controller
     {
         private readonly ITimelineEventModelBuilder eventModelBuilder;
