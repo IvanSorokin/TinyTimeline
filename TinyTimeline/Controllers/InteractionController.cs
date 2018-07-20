@@ -34,6 +34,7 @@ namespace TinyTimeline.Controllers
                         });
         }
 
+        [Authorize(Policy = PolicyNames.OnlyAdmin)]
         public IActionResult AddSession() => View();
 
         public IActionResult Voting(Guid sessionId)
@@ -91,6 +92,7 @@ namespace TinyTimeline.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = PolicyNames.OnlyAdmin)]
         public IActionResult SaveConclusion(Guid sessionId, Guid eventId, string conclusion)
         {
             sessionsRepository.SetConclusion(sessionId, eventId, conclusion);
@@ -111,6 +113,7 @@ namespace TinyTimeline.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Policy = PolicyNames.OnlyAdmin)]
         public IActionResult DeleteEvent(Guid sessionId, Guid eventId)
         {
             sessionsRepository.RemoveEvent(sessionId, eventId);
@@ -118,6 +121,7 @@ namespace TinyTimeline.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = PolicyNames.OnlyAdmin)]
         public IActionResult SaveSession(string sessionName)
         {
             sessionsRepository.Save(new Session
@@ -131,6 +135,7 @@ namespace TinyTimeline.Controllers
             return RedirectToAction("Sessions", "Presentation");
         }
 
+        [Authorize(Policy = PolicyNames.OnlyAdmin)]
         public IActionResult DeleteSession(Guid sessionid)
         {
             sessionsRepository.DeleteSession(sessionid);
@@ -162,6 +167,7 @@ namespace TinyTimeline.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Policy = PolicyNames.OnlyAdmin)]
         public IActionResult DeleteReview(Guid sessionId, Guid reviewId)
         {
             sessionsRepository.RemoveReview(sessionId, reviewId);

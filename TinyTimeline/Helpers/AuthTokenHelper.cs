@@ -16,7 +16,7 @@ namespace TinyTimeline.Helpers
                                                                                            .Select(z => new AuthToken(z.Value, z.Role))
                                                                                            .ToArray();
 
-        public static bool HasRole(UserRole role, HttpContext context) => Guid.TryParse(context.Request.Cookies["authToken"], out Guid parsed) &&
+        public static bool UserHasRole(UserRole role, HttpContext context) => Guid.TryParse(context.Request.Cookies["authToken"], out Guid parsed) &&
                                                                           authTokens.FirstOrDefault(x => x.Value == parsed)?.Role == role;
 
         private class ConfigToken

@@ -20,10 +20,10 @@ namespace TinyTimeline.Policies
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, 
                                                        UserRoleRequirement roleRequirement)
         {
-            if (!roleRequirement.Roles.Any(x => AuthTokenHelper.HasRole(x, httpContextAccessor.HttpContext)))
+            if (!roleRequirement.Roles.Any(x => AuthTokenHelper.UserHasRole(x, httpContextAccessor.HttpContext)))
             {
                 var redirectContext = context.Resource as AuthorizationFilterContext;
-                redirectContext.Result = new RedirectToActionResult("Register", "Tokens", null);
+                redirectContext.Result = new RedirectToActionResult("SetToken", "Tokens", null);
             }
             context.Succeed(roleRequirement);
             return Task.CompletedTask;
