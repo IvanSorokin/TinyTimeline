@@ -11,7 +11,7 @@
     }
     <div>
         <div style="padding-bottom: 25px">
-            @Model.Text
+            <div class="multiline">@Model.Text </div>
             @if (Model.ToBeDiscussed > 0 && Model.AllowModify)
             {
                 <div class="margin_top">
@@ -22,9 +22,9 @@
             {
                 <div class="margin_top">
                     <label>Conclusion</label>
-                
+
                     <div >
-                        <div class="discussion_area" style="background-color: white"  id=@($"conclusion{Model.Id}")>@Model.Conclusion</div>
+                        <div class="discussion_area multiline" id=@($"conclusion{Model.Id}")>@Model.Conclusion</div>
                     </div>
                 </div>
             }

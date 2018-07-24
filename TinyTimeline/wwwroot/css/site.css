@@ -28,6 +28,11 @@
     width: 600px;
 }
 
+.multiline
+{
+    white-space: pre-line;
+}
+
 .menu{
     border: 4px black;
     border-collapse: collapse;
