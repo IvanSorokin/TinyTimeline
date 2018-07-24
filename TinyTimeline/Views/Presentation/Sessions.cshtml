@@ -22,7 +22,7 @@
     else
     {
         <div>
-            <label>Oops! No sessions. Create one!</label>
+            <label>Oops! No sessions. @(Model.AllowModify ? "Create one!" : "")</label>
         </div>
     }
     
