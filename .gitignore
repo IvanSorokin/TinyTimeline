@@ -2,4 +2,10 @@
 .vs/
 bin/
 obj/
+*.[Pp]ublish.xml
+*.azurePubxml
+*.pubxml
+*.pubxml.user
+*.publishproj
 TinyTimeline.sln.DotSettings.user
+/TinyTimeline/appsettings.Release.json

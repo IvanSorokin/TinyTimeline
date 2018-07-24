@@ -1,6 +1,9 @@
-﻿using System;
-using System.Globalization;
-using DataAccess;
+﻿using System.Globalization;
+using DataAccess.Concrete.Mappers;
+using DataAccess.Concrete.Repositories;
+using DataAccess.Documents;
+using DataAccess.Interfaces.Mappers;
+using DataAccess.Interfaces.Repositories;
 using Domain.Objects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -8,7 +11,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using StructureMap;
+using MongoDB.Driver;
+using TinyTimeline.Helpers;
+using TinyTimeline.ModelBuilding;
 using TinyTimeline.Policies;
 
 namespace TinyTimeline
@@ -22,7 +27,7 @@ namespace TinyTimeline
 
         public IConfiguration Configuration { get; }
 
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc()
                     .AddControllersAsServices();
@@ -47,30 +52,23 @@ namespace TinyTimeline
             
 
             services.AddSingleton<IAuthorizationHandler, UserRoleRequirementHandler>()
+                    .AddSingleton(GetCollection<SessionDocument>("sessions"))
+                    .AddSingleton<IAuthTokenHelper, AuthTokenHelper>()
+                    .AddSingleton<ITimelineEventModelBuilder, TimelineEventModelBuilder>()
+                    .AddSingleton<ISessionsRepository, SessionsRepository>()
+                    .AddSingleton<ISessionModelBuilder, SessionModelBuilder>()
+                    .AddTransient<ITwoWayMapper<TimelineEventDocument, TimelineEvent>, TimelineEventsMapper>()
+                    .AddTransient<ITwoWayMapper<SessionDocument, Session>, SessionMapper>()
+                    .AddTransient<ITwoWayMapper<ReviewDocument, Review>, ReviewMapper>()
                     .AddHttpContextAccessor();
 
-            return ConfigureIoC(services);
         }
-
-        public IServiceProvider ConfigureIoC(IServiceCollection services)
+        
+        private IMongoCollection<T> GetCollection<T>(string collectionName)
         {
-            var registry = new Registry();
-            registry.IncludeRegistry<DataAccessRegistry>();
-
-            var container = new Container(registry);
-
-            container.Configure(config =>
-                                {
-                                    config.Scan(_ =>
-                                                {
-                                                    _.AssemblyContainingType(typeof(Startup));
-                                                    _.AssemblyContainingType(typeof(DataAccessRegistry));
-                                                    _.WithDefaultConventions();
-                                                });
-                                    config.Populate(services);
-                                });
-
-            return container.GetInstance<IServiceProvider>();
+            var connectionString = Configuration["MongoConnection:ConnectionString"];
+            var dbString = Configuration["MongoConnection:Database"];
+            return new MongoClient(connectionString).GetDatabase(dbString).GetCollection<T>(collectionName);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

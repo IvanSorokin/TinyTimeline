@@ -8,26 +8,29 @@ namespace TinyTimeline.Helpers
 {
     public class AuthTokenHelper : IAuthTokenHelper
     {
+        private readonly AuthToken[] authTokens;
+        private readonly IConfiguration configuration;
         private readonly IHttpContextAccessor httpContextAccessor;
-        private HttpContext context => httpContextAccessor.HttpContext;
-        
-        private static readonly AuthToken[] authTokens = ReadAuthTokensFromConfig();
 
-        public AuthTokenHelper(IHttpContextAccessor httpContextAccessor)
+        public AuthTokenHelper(IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
         {
             this.httpContextAccessor = httpContextAccessor;
+            this.configuration = configuration;
+            authTokens = ReadAuthTokensFromConfig();
         }
 
-        private static AuthToken[] ReadAuthTokensFromConfig() => new ConfigurationBuilder().AddJsonFile("appsettings.json").Build()
-                                                                                           .GetSection("Auth:Tokens")
-                                                                                           .Get<ConfigToken[]>()
-                                                                                           .Select(z => new AuthToken(z.Value, z.Role))
-                                                                                           .ToArray();
+        private HttpContext context => httpContextAccessor.HttpContext;
 
         public bool UserHasRole(UserRole role) => Guid.TryParse(context.Request.Cookies["authToken"], out Guid parsed) &&
-                                                                        authTokens.FirstOrDefault(x => x.Value == parsed)?.Role == role;
+                                                  authTokens.FirstOrDefault(x => x.Value == parsed)?.Role == role;
 
         public bool IsAdmin() => UserHasRole(UserRole.Administrator);
+
+        private AuthToken[] ReadAuthTokensFromConfig() => configuration
+                                                          .GetSection("Auth:Tokens")
+                                                          .Get<ConfigToken[]>()
+                                                          .Select(z => new AuthToken(z.Value, z.Role))
+                                                          .ToArray();
 
         private class ConfigToken
         {
