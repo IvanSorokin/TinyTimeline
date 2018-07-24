@@ -57,9 +57,9 @@ namespace TinyTimeline
                     .AddSingleton<ITimelineEventModelBuilder, TimelineEventModelBuilder>()
                     .AddSingleton<ISessionsRepository, SessionsRepository>()
                     .AddSingleton<ISessionModelBuilder, SessionModelBuilder>()
-                    .AddTransient<ITwoWayMapper<TimelineEventDocument, TimelineEvent>, TimelineEventsMapper>()
-                    .AddTransient<ITwoWayMapper<SessionDocument, Session>, SessionMapper>()
-                    .AddTransient<ITwoWayMapper<ReviewDocument, Review>, ReviewMapper>()
+                    .AddSingleton<ITwoWayMapper<TimelineEventDocument, TimelineEvent>, TimelineEventsMapper>()
+                    .AddSingleton<ITwoWayMapper<SessionDocument, Session>, SessionMapper>()
+                    .AddSingleton<ITwoWayMapper<ReviewDocument, Review>, ReviewMapper>()
                     .AddHttpContextAccessor();
 
         }
