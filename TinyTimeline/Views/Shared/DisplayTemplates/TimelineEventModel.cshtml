@@ -12,10 +12,20 @@
     <div>
         <div style="padding-bottom: 25px">
             @Model.Text
-            @if (Model.ToBeDiscussed > 0)
+            @if (Model.ToBeDiscussed > 0 && Model.AllowModify)
             {
                 <div class="margin_top">
                     <textarea class="discussion_area" rows="5"  id=@($"conclusion{Model.Id}")  name="Text" type="text" value="" placeholder="Write your conclusion for event">@Model.Conclusion</textarea>
+                </div>
+            }
+            else if (!string.IsNullOrEmpty(Model.Conclusion))
+            {
+                <div class="margin_top">
+                    <label>Conclusion</label>
+                
+                    <div >
+                        <div class="discussion_area" style="background-color: white"  id=@($"conclusion{Model.Id}")>@Model.Conclusion</div>
+                    </div>
                 </div>
             }
         </div>
