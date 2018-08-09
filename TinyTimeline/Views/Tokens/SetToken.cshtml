@@ -1,13 +1,19 @@
-﻿<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
+﻿@{
+    Layout = "Layout";
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
 <link rel="stylesheet" href="~/css/site.css"/>
 
-<form action="/Tokens/SaveToken" method="post">    
-    <div class="margin_top margin_left">
-        <div>
-            <label>Enter your token</label>
+<div>
+    <form action="/Tokens/SaveToken" method="post">    
+        <div class="margin_top">
+            <div>
+                <label>Enter your token</label>
+            </div>
+            <input class="text-box single-line" style="width: 80%" id="token" name="token" type="text" value="">
+            
+            <input class="btn btn-primary btn-sm" type="submit" value="Continue"/>
         </div>
-        <input class="text-box single-line" style="width: 255px" id="token" name="token" type="text" value="">
-        
-        <input class="btn btn-primary btn-sm" type="submit" value="Continue"/>
-    </div>
-</form>
+    </form>
+</div>

@@ -6,10 +6,6 @@
     margin-bottom : 10px;
 }
 
-.margin_left {
-    margin-left : 10px;
-}
-
 .margin_top {
     margin-top : 10px;
 }
@@ -66,6 +62,13 @@
 .layout{
     width: 50%;
     margin: 0 auto;
+}
+
+@media (pointer:coarse) {
+    .layout {
+        width: 95%;
+        margin: 0 auto;
+    }
 }
 
 .layout_container{
