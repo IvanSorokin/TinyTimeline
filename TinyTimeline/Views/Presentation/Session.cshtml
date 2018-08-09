@@ -1,6 +1,10 @@
 ﻿@using TinyTimeline.Models
 @model SessionModel
 
+@{
+    Layout = "Layout";
+}
+
 <link rel="stylesheet" href="~/css/site.css"/>
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
 <script src="~/js/site.js" asp-append-version="true"></script>
@@ -17,7 +21,7 @@
         {
             @Html.DisplayFor(m => e)
         }
-        <div>
+        <div class="margin_bottom">
             @Html.Partial("TimelineEventFilters", Model.SessionInfo.SessionId)
             @Html.ActionLink("Add event", "AddEvent", "Interaction", new {sessionId = Model.SessionInfo.SessionId}, new {@class = "btn btn-primary btn-sm"})
             @Html.ActionLink("Vote", "Voting", "Interaction", new {sessionId = Model.SessionInfo.SessionId}, new {@class = "btn btn-primary btn-sm"})

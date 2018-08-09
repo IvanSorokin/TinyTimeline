@@ -15,32 +15,28 @@
 }
 
 .event{
-    width: 600px;
     word-break: break-word;
 }
 
 .discussion_area{
-    width: 550px;
     margin-bottom: 10px;
+    width: 90%;
+    resize: vertical;
 }
 
-.session{
-    width: 600px;
-}
-
-.multiline
-{
+.multiline {
     white-space: pre-line;
 }
 
 .menu{
     border: 4px black;
     border-collapse: collapse;
+    width: 100%;
 }
 
 .event_desciption{
-    width: 400px;
     height: 200px;
+    width: 80%;
 }
 
 .float_right{
@@ -64,7 +60,16 @@
     border: 1px solid black;
     background: rgba(232, 230, 244, 0.12);
     padding: 10px;
-    width: 600px;
+    
+}
+
+.layout{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.layout_container{
+
 }
 
 input[type=number]::-webkit-inner-spin-button,
