@@ -93,7 +93,7 @@ namespace TinyTimeline.Controllers
 
             return View(new SessionModel
                         {
-                            Events = events,
+                            Events = events.ToList(),
                             EventFilterType = filterType,
                             SessionInfo = new SessionInfoModel
                                           {

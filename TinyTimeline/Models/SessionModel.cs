@@ -4,7 +4,7 @@ namespace TinyTimeline.Models
 {
     public class SessionModel
     {       
-        public IEnumerable<TimelineEventModel> Events { get; set; }
+        public ICollection<TimelineEventModel> Events { get; set; }
         
         public EventFilterType EventFilterType { get; set; }
         

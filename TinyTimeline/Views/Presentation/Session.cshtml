@@ -15,7 +15,7 @@
     @Html.DisplayFor(m => m.SessionInfo)
     
     <div class="margin_bottom">
-        <label>@Html.DisplayFor(z => z.EventFilterType) events</label>
+        <label>@Html.DisplayFor(z => z.EventFilterType) events (@Model.Events.Count())</label>
     </div>
         @foreach (var e in Model.Events)
         {
