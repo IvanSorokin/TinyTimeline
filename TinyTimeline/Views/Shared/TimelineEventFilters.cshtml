@@ -1,10 +1,10 @@
 ﻿@using TinyTimeline.Models
 @model Guid
 
-<div class="margin_bottom">
-    @Html.ActionLink("All", "Session", "Presentation", new {sessionId = Model, filterType = EventFilterType.All}, new {@class = "btn btn-info btn-sm"})
-    @Html.ActionLink("Positive", "Session", "Presentation", new {sessionId = Model, filterType = EventFilterType.Positive}, new {@class = "btn btn-info btn-sm"})
-    @Html.ActionLink("Negative", "Session", "Presentation", new {sessionId = Model, filterType = EventFilterType.Negative}, new {@class = "btn btn-info btn-sm"})
-    @Html.ActionLink("Debatable", "Session", "Presentation", new {sessionId = Model, filterType = EventFilterType.Debatable}, new {@class = "btn btn-info btn-sm"})
-    @Html.ActionLink("Discussable", "Session", "Presentation", new {sessionId = Model, filterType = EventFilterType.Discussable}, new {@class = "btn btn-info btn-sm"})
+<div>
+    @Html.ActionLink("All", "Session", "Presentation", new {sessionId = Model, filterType = EventFilterType.All}, new {@class = "btn btn-info btn-sm margin_bottom"})
+    @Html.ActionLink("Positive", "Session", "Presentation", new {sessionId = Model, filterType = EventFilterType.Positive}, new {@class = "btn btn-info btn-sm margin_bottom"})
+    @Html.ActionLink("Negative", "Session", "Presentation", new {sessionId = Model, filterType = EventFilterType.Negative}, new {@class = "btn btn-info btn-sm margin_bottom"})
+    @Html.ActionLink("Debatable", "Session", "Presentation", new {sessionId = Model, filterType = EventFilterType.Debatable}, new {@class = "btn btn-info btn-sm margin_bottom"})
+    @Html.ActionLink("Discussable", "Session", "Presentation", new {sessionId = Model, filterType = EventFilterType.Discussable}, new {@class = "btn btn-info btn-sm margin_bottom"})
 </div>

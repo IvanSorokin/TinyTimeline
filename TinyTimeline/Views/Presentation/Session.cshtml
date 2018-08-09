@@ -21,11 +21,11 @@
         {
             @Html.DisplayFor(m => e)
         }
-        <div class="margin_bottom">
+        <div>
             @Html.Partial("TimelineEventFilters", Model.SessionInfo.SessionId)
-            @Html.ActionLink("Add event", "AddEvent", "Interaction", new {sessionId = Model.SessionInfo.SessionId}, new {@class = "btn btn-primary btn-sm"})
-            @Html.ActionLink("Vote", "Voting", "Interaction", new {sessionId = Model.SessionInfo.SessionId}, new {@class = "btn btn-primary btn-sm"})
-            @Html.ActionLink("Pick to discuss", "PickToBeDiscussed", "Interaction", new {sessionId = Model.SessionInfo.SessionId}, new {@class = "btn btn-primary btn-sm"})
-            @Html.ActionLink("Reviews", "Reviews", "Presentation", new {sessionId = Model.SessionInfo.SessionId}, new {@class = "btn btn-primary btn-sm"})
+            @Html.ActionLink("Add event", "AddEvent", "Interaction", new {sessionId = Model.SessionInfo.SessionId}, new {@class = "btn btn-primary btn-sm margin_bottom"})
+            @Html.ActionLink("Vote", "Voting", "Interaction", new {sessionId = Model.SessionInfo.SessionId}, new {@class = "btn btn-primary btn-sm margin_bottom"})
+            @Html.ActionLink("Pick to discuss", "PickToBeDiscussed", "Interaction", new {sessionId = Model.SessionInfo.SessionId}, new {@class = "btn btn-primary btn-sm margin_bottom"})
+            @Html.ActionLink("Reviews", "Reviews", "Presentation", new {sessionId = Model.SessionInfo.SessionId}, new {@class = "btn btn-primary btn-sm margin_bottom"})
         </div>
 </div>
