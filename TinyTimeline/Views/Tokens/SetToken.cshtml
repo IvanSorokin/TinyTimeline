@@ -7,13 +7,13 @@
 <link rel="stylesheet" href="~/css/site.css"/>
 
 <div>
-    <form action="/Tokens/SaveToken" method="post">    
+    <form autocomplete="off" action="/Tokens/SaveToken" method="post">    
         <div class="margin_top">
             <div>
                 <label>Enter your token</label>
             </div>
-            <input class="text-box single-line margin_bottom" style="width: 80%" id="token" name="token" type="text" value="">
-            <input hidden="true" id="returnUrl" name="returnUrl" type="text" value="@Model">
+            <input autocomplete="off" class="text-box single-line margin_bottom" style="width: 80%" id="token" name="token" type="text" value="">
+            <input autocomplete="off" hidden="true" id="returnUrl" name="returnUrl" type="text" value="@Model">
             
             <input class="btn btn-primary btn-sm" type="submit" value="Continue"/>
         </div>
