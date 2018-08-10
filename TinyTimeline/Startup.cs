@@ -60,6 +60,7 @@ namespace TinyTimeline
                     .AddSingleton<ITwoWayMapper<TimelineEventDocument, TimelineEvent>, TimelineEventsMapper>()
                     .AddSingleton<ITwoWayMapper<SessionDocument, Session>, SessionMapper>()
                     .AddSingleton<ITwoWayMapper<ReviewDocument, Review>, ReviewMapper>()
+                    .AddSingleton(Configuration)
                     .AddHttpContextAccessor();
 
         }

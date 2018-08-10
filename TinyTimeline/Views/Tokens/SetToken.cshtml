@@ -1,4 +1,5 @@
-﻿@{
+﻿@model string
+@{
     Layout = "Layout";
 }
 
@@ -12,6 +13,7 @@
                 <label>Enter your token</label>
             </div>
             <input class="text-box single-line margin_bottom" style="width: 80%" id="token" name="token" type="text" value="">
+            <input hidden="true" id="returnUrl" name="returnUrl" type="text" value="@Model">
             
             <input class="btn btn-primary btn-sm" type="submit" value="Continue"/>
         </div>
