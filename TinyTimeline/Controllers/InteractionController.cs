@@ -44,7 +44,7 @@ namespace TinyTimeline.Controllers
         public IActionResult Voting(Guid sessionId)
         {
             var session = sessionsRepository.Get(sessionId);
-            var events = eventModelBuilder.DateSortedBuild(session.Events, sessionId, authTokenHelper.IsAdmin())
+            var events = eventModelBuilder.BuildDateSorted(session.Events, sessionId, authTokenHelper.IsAdmin())
                                           .ToList();
             if (!events.Any())
                 return RedirectToAction("AddEvent", "Interaction", new {sessionId});
@@ -64,7 +64,7 @@ namespace TinyTimeline.Controllers
         public IActionResult PickToBeDiscussed(Guid sessionId)
         {
             var session = sessionsRepository.Get(sessionId);
-            var events = eventModelBuilder.DateSortedBuild(session.Events, sessionId, authTokenHelper.IsAdmin())
+            var events = eventModelBuilder.BuildDateSorted(session.Events, sessionId, authTokenHelper.IsAdmin())
                                           .ToList();
             if (!events.Any())
                 return RedirectToAction("AddEvent", "Interaction", new {sessionId});

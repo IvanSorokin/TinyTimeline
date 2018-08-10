@@ -17,7 +17,7 @@ namespace TinyTimeline.ModelBuilding
         {
             return new SessionModel
                    {
-                       Events = eventModelBuilder.DateSortedBuild(session.Events, session.Id, allowModify).ToList(),
+                       Events = eventModelBuilder.BuildDateSorted(session.Events, session.Id, allowModify).ToList(),
                        SessionInfo = new SessionInfoModel {SessionId = session.Id, SessionCreateDate = session.CreateDate, SessionName = session.Name}
                    };
         }

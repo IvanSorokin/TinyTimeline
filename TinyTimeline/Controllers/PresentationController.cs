@@ -73,19 +73,19 @@ namespace TinyTimeline.Controllers
             switch (filterType)
             {
                 case EventFilterType.All:
-                    events = eventModelBuilder.DateSortedBuild(session.Events, sessionId, allowModify);
+                    events = eventModelBuilder.BuildDateSorted(session.Events, sessionId, allowModify);
                     break;
                 case EventFilterType.Positive:
-                    events = eventModelBuilder.DateSortedPositiveBuild(session, allowModify);
+                    events = eventModelBuilder.BuildPositive(session, allowModify);
                     break;
                 case EventFilterType.Debatable:
-                    events = eventModelBuilder.DateSortedDebatableBuild(session, allowModify);
+                    events = eventModelBuilder.BuildDebatable(session, allowModify);
                     break;
                 case EventFilterType.Negative:
-                    events = eventModelBuilder.DateSortedNegativeBuild(session, allowModify);
+                    events = eventModelBuilder.BuildNegative(session, allowModify);
                     break;
                 case EventFilterType.Discussable:
-                    events = eventModelBuilder.ToBeDiscussedBuild(session, allowModify);
+                    events = eventModelBuilder.BuildToBeDiscussed(session, allowModify);
                     break;
                 default:
                     return NotFound();
