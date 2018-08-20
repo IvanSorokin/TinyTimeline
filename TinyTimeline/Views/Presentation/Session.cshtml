@@ -15,18 +15,23 @@
     @Html.DisplayFor(m => m.SessionInfo)
     
     <div class="margin_bottom">
-        <label>@Html.DisplayFor(z => z.EventFilterType) events (@Model.Events.Count())</label>
+        <label>@Html.DisplayFor(z => z.EventFilterType) events (@Model.Events.Count)</label>
     </div>
+    
+    @if (Model.Events.Count > 8)
+    {
+        <div>
+            @Html.Partial("TimelineEventFilters", Model.SessionInfo.SessionId)
+        </div>
+    }
+    
     @foreach (var e in Model.Events)
     {
         @Html.DisplayFor(m => e)
     }
     <div>
         @Html.Partial("TimelineEventFilters", Model.SessionInfo.SessionId)
-        @Html.ActionLink("Add event", "AddEvent", "Interaction", new {sessionId = Model.SessionInfo.SessionId}, new {@class = "btn btn-primary btn-sm margin_bottom"})
-        @Html.ActionLink("Vote", "Voting", "Interaction", new {sessionId = Model.SessionInfo.SessionId}, new {@class = "btn btn-primary btn-sm margin_bottom"})
-        @Html.ActionLink("Pick to discuss", "PickToBeDiscussed", "Interaction", new {sessionId = Model.SessionInfo.SessionId}, new {@class = "btn btn-primary btn-sm margin_bottom"})
-        @Html.ActionLink("Reviews", "Reviews", "Presentation", new {sessionId = Model.SessionInfo.SessionId}, new {@class = "btn btn-primary btn-sm margin_bottom"})
+        @Html.Partial("SessionButtons", Model.SessionInfo.SessionId)
     </div>
 </div>
 

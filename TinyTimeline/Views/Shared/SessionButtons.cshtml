@@ -1,0 +1,8 @@
+﻿@model Guid
+
+<div>
+    @Html.ActionLink("Add event", "AddEvent", "Interaction", new {sessionId = Model}, new {@class = "btn btn-primary btn-sm margin_bottom"})
+    @Html.ActionLink("Vote", "Voting", "Interaction", new {sessionId = Model}, new {@class = "btn btn-primary btn-sm margin_bottom"})
+    @Html.ActionLink("Pick to discuss", "PickToBeDiscussed", "Interaction", new {sessionId = Model}, new {@class = "btn btn-primary btn-sm margin_bottom"})
+    @Html.ActionLink("Reviews", "Reviews", "Presentation", new {sessionId = Model}, new {@class = "btn btn-primary btn-sm margin_bottom"})
+</div>
