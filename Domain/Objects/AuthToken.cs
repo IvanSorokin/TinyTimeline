@@ -1,16 +1,14 @@
-﻿using System;
-
-namespace Domain.Objects
+﻿namespace Domain.Objects
 {
     public class AuthToken
     {
-        public AuthToken(Guid value, UserRole role)
+        public AuthToken(string value, UserRole role)
         {
             Value = value;
             Role = role;
         }
 
-        public Guid Value { get; }
+        public string Value { get; }
         public UserRole Role { get; }
     }
 }

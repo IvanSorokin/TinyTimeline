@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Domain.Objects;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -21,8 +20,7 @@ namespace TinyTimeline.Helpers
 
         private HttpContext context => httpContextAccessor.HttpContext;
 
-        public bool UserHasRole(UserRole role) => Guid.TryParse(context.Request.Cookies["authToken"], out Guid parsed) &&
-                                                  authTokens.FirstOrDefault(x => x.Value == parsed)?.Role == role;
+        public bool UserHasRole(UserRole role) => authTokens.FirstOrDefault(x => x.Value == context.Request.Cookies["authToken"])?.Role == role;
 
         public bool IsAdmin() => UserHasRole(UserRole.Administrator);
 
@@ -34,7 +32,7 @@ namespace TinyTimeline.Helpers
 
         private class ConfigToken
         {
-            public Guid Value { get; set; }
+            public string Value { get; set; }
             public UserRole Role { get; set; }
         }
     }
