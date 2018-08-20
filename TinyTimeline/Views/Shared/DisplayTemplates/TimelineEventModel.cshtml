@@ -15,7 +15,7 @@
             @if (Model.ToBeDiscussed > 0 && Model.AllowModify)
             {
                 <div class="margin_top">
-                    <textarea class="discussion_area" rows="5"  id=@($"conclusion{Model.Id}")  name="Text" type="text" value="" placeholder="Write your conclusion for event">@Model.Conclusion</textarea>
+                    <textarea data-autoresize class="discussion_area" rows="3"  id=@($"conclusion{Model.Id}")  name="Text" type="text" value="" placeholder="Write your conclusion for event">@Model.Conclusion</textarea>
                 </div>
             }
             else if (!string.IsNullOrEmpty(Model.Conclusion))
@@ -32,19 +32,19 @@
 
         @if (Model.AllowModify)
         {
-             if (Model.ToBeDiscussed > 0)
-             {
-                 <div class="float_right" style="margin-top: -20px">
-                     <a class="btn btn-info btn-xs" style="cursor: pointer" onclick="saveConclusion('@Model.Id', '@Model.SessionId')">Save</a>
-                     <a class="btn btn-danger btn-xs" style="cursor: pointer" onclick="deleteEvent('@Model.Id', '@Model.SessionId')">Delete event</a>
-                 </div>
-             }
-             else
-             {
-                 <div class="float_right" style="margin-top: -20px">
-                     <a class="btn btn-danger btn-xs" style="cursor: pointer" onclick="deleteEvent('@Model.Id', '@Model.SessionId')">Delete event</a>
-                 </div>
-             }
+            if (Model.ToBeDiscussed > 0)
+            {
+                <div class="float_right" style="margin-top: -20px">
+                    <a class="btn btn-info btn-xs" style="cursor: pointer" onclick="saveConclusion('@Model.Id', '@Model.SessionId')">Save</a>
+                    <a class="btn btn-danger btn-xs" style="cursor: pointer" onclick="deleteEvent('@Model.Id', '@Model.SessionId')">Delete event</a>
+                </div>
+            }
+            else
+            {
+                <div class="float_right" style="margin-top: -20px">
+                    <a class="btn btn-danger btn-xs" style="cursor: pointer" onclick="deleteEvent('@Model.Id', '@Model.SessionId')">Delete event</a>
+                </div>
+            }
         }
 
     </div>

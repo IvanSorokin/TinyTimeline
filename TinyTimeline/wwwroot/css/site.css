@@ -17,7 +17,8 @@
 .discussion_area{
     margin-bottom: 10px;
     width: 100%;
-    resize: vertical;
+    box-sizing: border-box;
+    resize: none;
 }
 
 .multiline {
