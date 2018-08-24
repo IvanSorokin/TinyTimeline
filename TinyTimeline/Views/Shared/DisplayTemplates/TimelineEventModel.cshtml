@@ -1,8 +1,11 @@
 ﻿@model TinyTimeline.Models.TimelineEventModel
 
 <div class="event margin_bottom bordered_fill" id="@Model.Id">
-    <label>@Html.DisplayFor(m => m.Date):</label>
-    <label>+(@Model.Positive) / -(@Model.Negative)</label>
+    <div>
+        <label>@Html.DisplayFor(m => m.Date):</label>
+        <label>+(@Model.Positive) / -(@Model.Negative)</label> 
+    </div>
+    
     @if (Model.ToBeDiscussed > 0)
     {
         <div>
@@ -16,7 +19,7 @@
             {
                 <div class="margin_top">
                     <label>Conclusion</label>
-                    
+
                     <div>
                         <textarea data-autoresize class="discussion_area" rows="3"  id=@($"conclusion{Model.Id}")  name="Text" type="text" value="" placeholder="Write your conclusion for event">@Model.Conclusion</textarea>
                     </div>
@@ -38,14 +41,16 @@
         {
             if (Model.ToBeDiscussed > 0)
             {
-                <div class="float_right" style="margin-top: -20px">
+                <div id=@($"buttons{Model.Id}") class="float_right" style="margin-top: -20px">
+                    <a id=@($"select{Model.Id}") class="btn btn-primary btn-xs" style="cursor: pointer" onclick="selectEvent('@Model.Id', '@Model.SessionId')">Select</a>
                     <a class="btn btn-info btn-xs" style="cursor: pointer" onclick="saveConclusion('@Model.Id', '@Model.SessionId')">Save</a>
                     <a class="btn btn-danger btn-xs" style="cursor: pointer" onclick="deleteEvent('@Model.Id', '@Model.SessionId')">Delete event</a>
                 </div>
             }
             else
             {
-                <div class="float_right" style="margin-top: -20px">
+                <div id=@($"buttons{Model.Id}") class="float_right" style="margin-top: -20px">
+                    <a id=@($"select{Model.Id}") class="btn btn-primary btn-xs" style="cursor: pointer" onclick="selectEvent('@Model.Id', '@Model.SessionId')">Select</a>
                     <a class="btn btn-danger btn-xs" style="cursor: pointer" onclick="deleteEvent('@Model.Id', '@Model.SessionId')">Delete event</a>
                 </div>
             }

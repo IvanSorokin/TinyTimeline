@@ -49,6 +49,11 @@
     float: left;
 }
 
+.picked_item{
+    margin-right: -10%;
+    background: #a5d2b2 !important;
+}
+
 .menu td {
     padding: 5px;
     border: 1px solid black;
