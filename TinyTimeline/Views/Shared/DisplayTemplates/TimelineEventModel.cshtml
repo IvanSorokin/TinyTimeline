@@ -15,7 +15,11 @@
             @if (Model.ToBeDiscussed > 0 && Model.AllowModify)
             {
                 <div class="margin_top">
-                    <textarea data-autoresize class="discussion_area" rows="3"  id=@($"conclusion{Model.Id}")  name="Text" type="text" value="" placeholder="Write your conclusion for event">@Model.Conclusion</textarea>
+                    <label>Conclusion</label>
+                    
+                    <div>
+                        <textarea data-autoresize class="discussion_area" rows="3"  id=@($"conclusion{Model.Id}")  name="Text" type="text" value="" placeholder="Write your conclusion for event">@Model.Conclusion</textarea>
+                    </div>
                 </div>
             }
             else if (!string.IsNullOrEmpty(Model.Conclusion))
