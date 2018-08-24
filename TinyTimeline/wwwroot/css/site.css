@@ -49,9 +49,9 @@
     float: left;
 }
 
-.picked_item{
+.selected_item{
     margin-right: -10%;
-    background: #deeee2 !important;
+    background: rgba(232, 230, 244, 0.46) !important;
 }
 
 .menu td {

@@ -69,7 +69,7 @@ function controlMergeButtonsVisibility() {
 }
 
 function selectEvent(eventId, sessionId) {
-    $('#' + eventId).addClass('picked_item');
+    $('#' + eventId).addClass('selected_item');
     $('#buttons' + eventId).prepend(`<a class="btn btn-warning btn-xs" style="cursor: pointer" id="${'mergeButton' + eventId}">Merge</a>`);
     $('#mergeButton' + eventId).click(() => mergeEvents(sessionId));
     $('#select' + eventId).prop("onclick", null).off("click").text("Deselect").click(() => {deselectEvent(eventId, sessionId)});
@@ -77,14 +77,14 @@ function selectEvent(eventId, sessionId) {
 }
 
 function deselectEvent(eventId, sessionId) {
-    $('#' + eventId).removeClass('picked_item');
+    $('#' + eventId).removeClass('selected_item');
     $('#select' + eventId).prop("onclick", null).off("click").text("Select").click(() => {selectEvent(eventId, sessionId)});
     $('#mergeButton' + eventId).remove();
     controlMergeButtonsVisibility()
 }
 
 function mergeEvents(sessionId) {
-    let eventIds = $(".picked_item").toArray().map(x => x.id);
+    let eventIds = $(".selected_item").toArray().map(x => x.id);
     $.ajax({
         type: 'POST',
         url: '/Interaction/MergeEvents',
