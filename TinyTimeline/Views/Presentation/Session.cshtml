@@ -1,17 +1,11 @@
 ﻿@using TinyTimeline.Models
 @model SessionModel
-
 @{
     Layout = "Layout";
 }
 
-<link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
-<script src="~/js/site.js" asp-append-version="true"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" asp-append-version="true"></script>
-
 <div class="margin_top">
-    @Html.Partial("Menu", new MenuModel {SessionId = Model.SessionInfo.SessionId})
+    @await Html.PartialAsync("Menu", new MenuModel {SessionId = Model.SessionInfo.SessionId})
     @Html.DisplayFor(m => m.SessionInfo)
     
     <div class="margin_bottom">
@@ -20,9 +14,7 @@
     
     @if (Model.Events.Count > 8)
     {
-        <div>
-            @Html.Partial("TimelineEventFilters", Model.SessionInfo.SessionId)
-        </div>
+        @await Html.PartialAsync("TimelineEventFilters", Model.SessionInfo.SessionId)
     }
     
     @foreach (var e in Model.Events)
@@ -30,8 +22,8 @@
         @Html.DisplayFor(m => e)
     }
     <div>
-        @Html.Partial("TimelineEventFilters", Model.SessionInfo.SessionId)
-        @Html.Partial("SessionButtons", Model.SessionInfo.SessionId)
+        @await Html.PartialAsync("TimelineEventFilters", Model.SessionInfo.SessionId)
+        @await Html.PartialAsync("SessionButtons", Model.SessionInfo.SessionId)
     </div>
 </div>
 

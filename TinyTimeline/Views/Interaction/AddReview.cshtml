@@ -1,16 +1,12 @@
 ﻿@using TinyTimeline.Models
 @model SessionInfoModel
-
 @{
     Layout = "Layout";
 }
 
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
-<link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-
 <form action="/Interaction/SaveReview" method="post">    
     <div class="margin_top">
-        @Html.Partial("Menu", new MenuModel{SessionId = Model.SessionId})
+        @await Html.PartialAsync("Menu", new MenuModel{SessionId = Model.SessionId})
         @Html.DisplayFor(m => m)
         
         <div class="margin_bottom">
