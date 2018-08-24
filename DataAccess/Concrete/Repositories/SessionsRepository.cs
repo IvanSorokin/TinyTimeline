@@ -110,5 +110,27 @@ namespace DataAccess.Concrete.Repositories
                        Id = doc.Id
                    };
         }
+
+        public void MergeEvents(Guid sessionId, Guid[] eventIds)
+        {
+            var session = collection.Find(x => x.Id == sessionId).Single();
+            var eventsToMerge = session.Events.Where(x => eventIds.Contains(x.Id)).ToList();
+
+            var mergedEvent = new TimelineEvent
+                             {
+                                 Date = DateTime.Now.Date,
+                                 Id = Guid.NewGuid(),
+                                 Negative = eventsToMerge.Select(x => x.Negative).Sum(),
+                                 Positive = eventsToMerge.Select(x => x.Positive).Sum(),
+                                 ToBeDiscussed = eventsToMerge.Select(x => x.ToBeDiscussed).Sum(),
+                                 Text = string.Join("\n", eventsToMerge.Select(x => "* " + x.Text)),
+                                 Conclusion = string.Join("\n", eventsToMerge.Select(x => x.Conclusion))
+                             };
+            
+            AddEvent(sessionId, mergedEvent);
+            
+            var update = Builders<SessionDocument>.Update.PullFilter(x => x.Events, y => eventIds.Contains(y.Id));
+            collection.UpdateOne(x => x.Id == sessionId, update); 
+        }
     }
 }

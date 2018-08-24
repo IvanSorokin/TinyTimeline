@@ -138,6 +138,14 @@ namespace TinyTimeline.Controllers
                                     });
             return RedirectToAction("Sessions", "Presentation");
         }
+        
+        [HttpPost]
+        [Authorize(Policy = PolicyNames.OnlyAdmin)]
+        public IActionResult MergeEvents(MergeEventsModel model)
+        {
+            sessionsRepository.MergeEvents(model.SessionId, model.EventIds);
+            return Json("");
+        }
 
         [Authorize(Policy = PolicyNames.OnlyAdmin)]
         public IActionResult DeleteSession(Guid sessionid)

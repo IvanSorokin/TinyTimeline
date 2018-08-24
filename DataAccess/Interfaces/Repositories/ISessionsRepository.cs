@@ -18,5 +18,6 @@ namespace DataAccess.Interfaces.Repositories
         void ToBeDiscussed(Guid sessionId, Guid eventId);
         void SetConclusion(Guid sessionId, Guid eventId, string conclusion);
         SessionInfo GetSessionInfo(Guid sessionId);
+        void MergeEvents(Guid sessionId, Guid[] eventIds);
     }
 }

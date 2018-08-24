@@ -75,7 +75,17 @@ function deselectEvent(eventId, sessionId) {
 
 function mergeEvents(sessionId) {
     let eventIds = $(".picked_item").toArray().map(x => x.id);
-    alert(eventIds);
+    $.ajax({
+        type: 'POST',
+        url: '/Interaction/MergeEvents',
+        data: {
+            eventIds: eventIds,
+            sessionId: sessionId
+        },
+        success: function () {
+            location.reload();
+        }
+    });
 }
 
 function deleteReview(reviewId, sessionId) {
