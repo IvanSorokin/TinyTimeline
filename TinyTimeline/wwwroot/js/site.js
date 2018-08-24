@@ -61,8 +61,7 @@ function deleteEvent(eventId, sessionId) {
 
 function selectEvent(eventId, sessionId) {
     $('#' + eventId).addClass('picked_item');
-    let mergeButton = 'mergeButton' + eventId;
-    $('#buttons' + eventId).prepend(`<a class="btn btn-warning btn-xs" style="cursor: pointer" id="${mergeButton}">Merge</a>`);
+    $('#buttons' + eventId).prepend(`<a class="btn btn-warning btn-xs" style="cursor: pointer" id="${'mergeButton' + eventId}">Merge</a>`);
     $('#mergeButton' + eventId).click(() => mergeEvents(sessionId));
     $('#select' + eventId).prop("onclick", null).off("click").text("Deselect").click(() => {deselectEvent(eventId, sessionId)});
 }
