@@ -78,6 +78,9 @@
         width: 95%;
         margin: 0 auto;
     }
+    .selected_item {
+        background: rgba(232, 230, 244, 0.46) !important;
+    }
 }
 
 .layout_container{
