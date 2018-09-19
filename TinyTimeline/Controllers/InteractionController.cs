@@ -148,10 +148,11 @@ namespace TinyTimeline.Controllers
         }
 
         [Authorize(Policy = PolicyNames.OnlyAdmin)]
+        [HttpDelete]
         public IActionResult DeleteSession(Guid sessionid)
         {
             sessionsRepository.DeleteSession(sessionid);
-            return RedirectToAction("Sessions", "Presentation");
+            return Json("");
         }
 
         [HttpPost]

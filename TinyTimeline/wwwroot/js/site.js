@@ -45,18 +45,21 @@ function saveConclusion(eventId, sessionId) {
 }
 
 function deleteEvent(eventId, sessionId) {
-    $.ajax({
-        type: 'DELETE',
-        url: '/Interaction/DeleteEvent',
-        data: {
-            eventId: eventId,
-            sessionId: sessionId
-        },
-        success: function () {
-            $("#" + eventId).hide();
-            checkIfDone();
-        }
-    });
+    let confirmed = confirm("Delete event?");
+    if (confirmed) {
+        $.ajax({
+            type: 'DELETE',
+            url: '/Interaction/DeleteEvent',
+            data: {
+                eventId: eventId,
+                sessionId: sessionId
+            },
+            success: function () {
+                $("#" + eventId).hide();
+                checkIfDone();
+            }
+        });
+    }
 }
 
 function controlMergeButtonsVisibility() {
@@ -84,32 +87,54 @@ function deselectEvent(eventId, sessionId) {
 }
 
 function mergeEvents(sessionId) {
-    let eventIds = $(".selected_item").toArray().map(x => x.id);
-    $.ajax({
-        type: 'POST',
-        url: '/Interaction/MergeEvents',
-        data: {
-            eventIds: eventIds,
-            sessionId: sessionId
-        },
-        success: function () {
-            location.reload();
-        }
-    });
+    let confirmed = confirm("Merge events?");
+    if (confirmed) {
+        let eventIds = $(".selected_item").toArray().map(x => x.id);
+        $.ajax({
+            type: 'POST',
+            url: '/Interaction/MergeEvents',
+            data: {
+                eventIds: eventIds,
+                sessionId: sessionId
+            },
+            success: function () {
+                location.reload();
+            }
+        });
+    }
+}
+
+function deleteSession(sessionId) {
+    let confirmed = confirm("Delete session?");
+    if (confirmed) {
+        $.ajax({
+            type: 'DELETE',
+            url: '/Interaction/DeleteSession',
+            data: {
+                sessionId: sessionId
+            },
+            success: function () {
+                $("#" + sessionId).remove();
+            }
+        });
+    }
 }
 
 function deleteReview(reviewId, sessionId) {
-    $.ajax({
-        type: 'DELETE',
-        url: '/Interaction/DeleteReview',
-        data: {
-            reviewId: reviewId,
-            sessionId: sessionId
-        },
-        success: function () {
-            $("#" + reviewId).hide();
-        }
-    });
+    let confirmed = confirm("Delete review?");
+    if (confirmed) {
+        $.ajax({
+            type: 'DELETE',
+            url: '/Interaction/DeleteReview',
+            data: {
+                reviewId: reviewId,
+                sessionId: sessionId
+            },
+            success: function () {
+                $("#" + reviewId).hide();
+            }
+        });
+    }
 }
 
 function skip(currentId) {
@@ -120,4 +145,17 @@ function skip(currentId) {
 function checkIfDone() {
     if ($('.vote_item').filter(":hidden" ).length == $('.vote_item').length)
         $("#voteEnd").show();
+}
+
+function initTextareaAutoresize() {
+    $.each($('textarea[data-autoresize]'), function() {
+        let offset = this.offsetHeight - this.clientHeight;
+
+        let resizeTextarea = function (el) {
+            $(el).css('height', 'auto').css('height', el.scrollHeight + offset);
+        };
+
+        resizeTextarea(this);
+        $(this).on('keyup input', function() { resizeTextarea(this); }).removeAttr('data-autoresize');
+    });
 }

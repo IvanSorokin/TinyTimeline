@@ -35,6 +35,8 @@
 .event_desciption{
     height: 200px;
     width: 80%;
+    box-sizing: border-box;
+    resize: none;
 }
 
 .float_right{

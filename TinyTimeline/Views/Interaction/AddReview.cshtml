@@ -18,7 +18,7 @@
 
         <label>Review</label>
         <div>
-            <textarea class="event_desciption" id="Content" name="Content" type="text" value=""></textarea>
+            <textarea data-autoresize class="discussion_area" rows="5" id="Content" name="Content" type="text" value=""></textarea>
         </div>
 
         <input data-val="true" id="SessionId" name="SessionId" type="hidden" value="@Model.SessionId">
@@ -28,3 +28,7 @@
         </div>
     </div>
 </form>
+
+<script>
+    initTextareaAutoresize();
+</script>

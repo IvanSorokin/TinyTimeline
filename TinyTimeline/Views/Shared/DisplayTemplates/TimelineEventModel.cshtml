@@ -42,15 +42,15 @@
             if (Model.ToBeDiscussed > 0)
             {
                 <div id=@($"buttons{Model.Id}") class="float_right" style="margin-top: -20px">
-                    <a id=@($"select{Model.Id}") class="btn btn-primary btn-xs" style="cursor: pointer" onclick="selectEvent('@Model.Id', '@Model.SessionId')">Select</a>
-                    <a class="btn btn-info btn-xs" style="cursor: pointer" onclick="saveConclusion('@Model.Id', '@Model.SessionId')">Save</a>
+                    <a id=@($"select{Model.Id}") class="btn btn-info btn-xs" style="cursor: pointer" onclick="selectEvent('@Model.Id', '@Model.SessionId')">Select</a>
+                    <a class="btn btn-primary btn-xs" style="cursor: pointer" onclick="saveConclusion('@Model.Id', '@Model.SessionId')">Save conclusion</a>
                     <a class="btn btn-danger btn-xs" style="cursor: pointer" onclick="deleteEvent('@Model.Id', '@Model.SessionId')">Delete event</a>
                 </div>
             }
             else
             {
                 <div id=@($"buttons{Model.Id}") class="float_right" style="margin-top: -20px">
-                    <a id=@($"select{Model.Id}") class="btn btn-primary btn-xs" style="cursor: pointer" onclick="selectEvent('@Model.Id', '@Model.SessionId')">Select</a>
+                    <a id=@($"select{Model.Id}") class="btn btn-info btn-xs" style="cursor: pointer" onclick="selectEvent('@Model.Id', '@Model.SessionId')">Select</a>
                     <a class="btn btn-danger btn-xs" style="cursor: pointer" onclick="deleteEvent('@Model.Id', '@Model.SessionId')">Delete event</a>
                 </div>
             }

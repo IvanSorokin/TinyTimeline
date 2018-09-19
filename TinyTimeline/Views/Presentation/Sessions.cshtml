@@ -10,12 +10,12 @@
         <label>All sessions created so far</label>
         foreach (var session in Model.Sessions)
         {
-            <div class="margin_bottom bordered_fill session">
+            <div class="margin_bottom bordered_fill session" id="@session.SessionInfo.SessionId">
                 @Html.ActionLink($"{session.SessionInfo.SessionName}", "Session", "Presentation", new {sessionId = session.SessionInfo.SessionId}) at @Html.DisplayFor(m => session.SessionInfo.SessionCreateDate)
 
                 @if (Model.AllowModify)
                 {
-                    @Html.ActionLink("Delete", "DeleteSession", "Interaction", new {sessionId = session.SessionInfo.SessionId}, new {@class = "btn btn-danger btn-xs float_right negative_margin_top"})
+                    <button class="btn btn-danger btn-xs float_right negative_margin_top" onclick="deleteSession('@session.SessionInfo.SessionId')">Delete</button>
                 }
             </div>
         }
