@@ -2,7 +2,18 @@
 
 <table class="menu margin_bottom bordered_fill">
     <tr>
-        <td>@Html.ActionLink("All sessions", "Sessions", "Presentation")</td>
-        <td>@Html.ActionLink("Current session", "Session", "Presentation", new {sessionId = Model.SessionId})</td>
+        <td style="width: 50%">@Html.ActionLink("All sessions", "Sessions", "Presentation")</td>
+        <td style="width: 50%">@Html.ActionLink("Current session", "Session", "Presentation", new {sessionId = Model.SessionId})</td>
+    </tr>
+
+</table>
+
+<table class="menu margin_bottom bordered_fill">
+
+    <tr>
+        <td style="width: 25%">@Html.ActionLink("Add event", "AddEvent", "Interaction", new {sessionId = Model.SessionId})</td>
+        <td style="width: 25%">@Html.ActionLink("Vote", "Voting", "Interaction", new {sessionId = Model.SessionId})</td>
+        <td style="width: 25%">@Html.ActionLink("Pick to discuss", "PickToBeDiscussed", "Interaction", new {sessionId = Model.SessionId})</td>
+        <td style="width: 25%">@Html.ActionLink("Reviews", "Reviews", "Presentation", new {sessionId = Model.SessionId})</td>
     </tr>
 </table>

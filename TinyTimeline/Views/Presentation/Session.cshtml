@@ -23,6 +23,10 @@
     }
     <div>
         @await Html.PartialAsync("TimelineEventFilters", Model.SessionInfo.SessionId)
-        @await Html.PartialAsync("SessionButtons", Model.SessionInfo.SessionId)
+        
+        @if (Model.Events.Count > 8)
+        {
+            @await Html.PartialAsync("SessionButtons", Model.SessionInfo.SessionId)
+        }
     </div>
 </div>
