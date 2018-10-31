@@ -6,6 +6,11 @@
     margin-bottom : 10px;
 }
 
+.event_content_block {
+    padding-bottom: 25px; 
+    margin-bottom: 5px
+}
+
 .margin_top {
     margin-top : 10px;
 }
