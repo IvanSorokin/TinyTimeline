@@ -11,6 +11,11 @@
     margin-bottom: 5px
 }
 
+.voting_buttons {
+    margin-top: -25px; 
+    margin-right: -5px
+}
+
 .margin_top {
     margin-top : 10px;
 }
