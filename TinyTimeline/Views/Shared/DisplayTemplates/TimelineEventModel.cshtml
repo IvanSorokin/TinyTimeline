@@ -1,6 +1,6 @@
 ﻿@model TinyTimeline.Models.TimelineEventModel
 
-<div class="event margin_bottom bordered_fill" id="@Model.Id">
+<div class="break_word margin_bottom bordered_fill" id="@Model.Id">
     <div>
         <label>@Html.DisplayFor(m => m.Date):</label>
         <label>+(@Model.Positive) / -(@Model.Negative)</label> 
